@@ -49,7 +49,8 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Manufacturer Name</th>
+                                    <th>ID</th>
+                                    <th>Manufacturer</th>
                                     <th>Image</th>
                                     <th>Description</th>
                                     <th>Created At</th>
@@ -60,19 +61,27 @@
 
                             <tbody>
                                 @if (@isset($record))
+                                    <?php $id = 0; ?>
+
                                     @foreach ($record as $record)
+                                        @php $id++ @endphp
+
                                         <tr>
+                                            <td>{{ $id }}</td>
+
                                             <td>{{ $record->name }}</td>
                                             <td>{{ $record->image }}</td>
                                             <td>
-    @php
-        // Decode HTML entities and strip tags
-        $plainDescription = strip_tags(html_entity_decode($record->description));
-    @endphp
+                                                @php
+                                                    // Decode HTML entities and strip tags
+                                                    $plainDescription = strip_tags(
+                                                        html_entity_decode($record->description),
+                                                    );
+                                                @endphp
 
-    {{-- Truncate description to 100 characters and add ellipses if it exceeds 100 characters --}}
-    {{ Str::limit($plainDescription, 100, '...') }}
-</td>
+                                                {{-- Truncate description to 100 characters and add ellipses if it exceeds 100 characters --}}
+                                                {{ Str::limit($plainDescription, 100, '...') }}
+                                            </td>
                                             <td>{{ $record->created_at }}</td>
 
 
@@ -124,8 +133,8 @@
 
 
     <script>
-        <script>
-        let sideBar = document.getElementById("sideBar");
+        < script >
+            let sideBar = document.getElementById("sideBar");
         let sideToggler = document.getElementById("sideToggler");
         let mainArea = document.getElementById("mainArea");
         let closeBtn = document.getElementById("sideCloseBtn");

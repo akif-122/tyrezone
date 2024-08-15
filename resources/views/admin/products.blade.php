@@ -43,6 +43,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Tyre Name</th>
                                 <th>Image</th>
                                 <th>Manufac. Name</th>
@@ -60,8 +61,11 @@
                         </thead>
 
                         <tbody>
+                            <?php $id = 0 ?>
                             @forelse($products as $product)
+                            @php $id++ @endphp
                                 <tr>
+                                    <td>{{ $id }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td><img src="{{ $product->image }}" alt="{{ $product->name }}"></td>
                                     <td>{{ $product->manufacturer_name }}</td>

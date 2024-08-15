@@ -56,7 +56,7 @@
                                     <div class="col-md-4 mb-4">
                                         <div class="form-group">
                                             <label for="">Image:</label>
-                                            <input type="text" name="image" class="form-control" placeholder="Image URL" >
+                                            <input type="file" name="image" class="form-control" placeholder="Image URL" >
                                         </div>
                                     </div>
                             

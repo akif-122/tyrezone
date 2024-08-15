@@ -75,7 +75,7 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-group">
                                             <label for="">Image:</label>
-                                            <input type="text" value="{{$product->image}}" name="image" class="form-control"
+                                            <input type="file" value="{{$product->image}}" name="image" class="form-control"
                                                 placeholder="Image Url">
                                         </div>
                                     </div>

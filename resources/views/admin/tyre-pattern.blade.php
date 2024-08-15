@@ -50,6 +50,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Patteren Name</th>
                                     <th>manufacture</th>
                                     <th>Created At</th>
@@ -59,9 +60,16 @@
                             </thead>
 
                             <tbody>
+
                                 @if (@isset($record) && $record->isNotEmpty())
+                                    <?php $id = 0; ?>
+
                                     @foreach ($record as $record)
+                                        @php $id++ @endphp
+
                                         <tr>
+                                            <td>{{ $id }}</td>
+
                                             <td>{{ $record->name_of_manufacturer }}</td>
                                             <td>{{ $record->type_of_pattern }}</td>
                                             <td>{{ $record->created_at }}</td>

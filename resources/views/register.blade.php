@@ -53,11 +53,11 @@
                                 name="email" class="form-control">
                         </div>
 
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <label for="">Phone <span>*</span></label>
                             <input required type="number" name="phone" placeholder="Phone" value=""
                                 name="phone" class="form-control">
-                        </div>
+                        </div> --}}
 
 
                         <div class="form-group mb-3">
@@ -82,12 +82,12 @@
                                 name="company_name" class="form-control">
                         </div>
 
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <label for="">Country</label>
                             <select name="country" class="form-select" id="">
                                 <option value="uk">United Kingdom</option>
                             </select>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group mb-3">
                             <label for="">City</label>
@@ -107,11 +107,11 @@
                             <input name="post_code" type="text" placeholder="Postcode" value="" name="postcode"
                                 class="form-control">
                         </div>
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <label for="">Company Phone</label>
                             <input name="c_phone" type="number" placeholder="Phone" value=""
                                 name="company_phone" class="form-control">
-                        </div>
+                        </div> --}}
 
                     </div>
 

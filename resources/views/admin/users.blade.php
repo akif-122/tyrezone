@@ -51,12 +51,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
                                     <th>Email</th>
-                                    <th>Phone</th>
                                     <th>Company</th>
-                                    <th>Country</th>
                                     <th>City</th>
                                     <th>Address</th>
                                     <th>Postcode</th>
@@ -68,19 +66,19 @@
 
                             <tbody>
                                 @if (isset($users) && $users->isNotEmpty())
+                                <?php $id = 0; ?>
                                     @foreach ($users as $user)
+                                    @php $id++ @endphp
+
                                         <tr>
-                                            <td>{{ $user->f_name }}</td>
-                                            <td>{{ $user->last_name }}</td>
+                                            <td>{{ $id }}</td>
+                                            <td>{{ $user->f_name }} {{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->phone }}</td>
                                             <td>{{ $user->company_name }}</td>
-                                            <td>{{ $user->country }}</td>
                                             <td>{{ $user->city }}</td>
                                             <td>{{ $user->address }}</td>
                                             <td>{{ $user->postcode }}</td>
-                                            <td>{{ $user->company_phone }}</td>
-
+                                            <td></td>
 
                                             <td>
                                                 <div class="last-btns">
