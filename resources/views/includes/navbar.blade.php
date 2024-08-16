@@ -103,7 +103,7 @@
                 <h6 class="mb-3">Total <strong>£127.05</strong></h6>
             </div>
             <div class=" d-flex justify-content-between">
-                <a href="" class="main-btn">View Cart</a>
+                <a href="{{ route("MainCart", ["id"=>4]) }}" class="main-btn">View Cart</a>
                 <a href="{{route("checkout")}}" class="main-btn">Checkout</a>
             </div>
         </div>

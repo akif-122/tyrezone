@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Handle the login request and compare credentials.
      *
@@ -84,6 +80,7 @@ class AdminController extends Controller
     }
     public function logout(Request $request)
     {
+        // ** Temprory for all type of users ** // 
         // Log out the user
         Auth::logout();
 

@@ -22,50 +22,50 @@ class ProductController extends Controller
     //     });
     // }
     public function add(Request $request)
-{
-    // Validate the request data
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'image' => 'nullable|url',
-        'manu_name' => 'required|string|max:255',
-        'pattern_type' => 'required|string|max:255', // Update to match the form field name
-        'fuel' => 'required|string|max:255',
-        'wet_grip' => 'required|string|max:255',
-        'road_noise' => 'required|string|max:255',
-        'size' => 'required|string|max:255',
-        'type' => 'required|string|max:255',
-        'season' => 'required|integer|between:0,2',
-        'budget' => 'nullable|boolean',
-        'price' => 'required|numeric|min:0',
-    ]);
+    {
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|url',
+            'manu_name' => 'required|string|max:255',
+            'pattern_type' => 'required|string|max:255', // Update to match the form field name
+            'fuel' => 'required|string|max:255',
+            'wet_grip' => 'required|string|max:255',
+            'road_noise' => 'required|string|max:255',
+            'size' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'season' => 'required|integer|between:0,2',
+            'budget' => 'nullable|boolean',
+            'price' => 'required|numeric|min:0',
+        ]);
 
-    // Check if the product already exists
-    // $exists = Product::where('name', $request->name)
-    //     ->where('manufacturer_name', $request->manu_name)
-    //     ->exists();
+        // Check if the product already exists
+        // $exists = Product::where('name', $request->name)
+        //     ->where('manufacturer_name', $request->manu_name)
+        //     ->exists();
 
-    // if ($exists) {
-    //     return redirect()->back()->withErrors('Product already exists.');
-    // }
+        // if ($exists) {
+        //     return redirect()->back()->withErrors('Product already exists.');
+        // }
 
-    // Create and save the new product
-    Product::create([
-        'name' => $request->name,
-        'image' => $request->image,
-        'manufacturer_name' => $request->manu_name,
-        'tyre_pattern' => $request->pattern_type, // Update to match the form field name
-        'fuel_efficiency' => $request->fuel,
-        'wet_grip' => $request->wet_grip,
-        'road_noise' => $request->road_noise,
-        'size' => $request->size,
-        'tyre_type' => $request->type,
-        'season' => $request->season,
-        'budget_tyres' => $request->has('budget') ? true : false, // Handle checkbox properly
-        'price' => $request->price,
-    ]);
+        // Create and save the new product
+        Product::create([
+            'name' => $request->name,
+            'image' => $request->image,
+            'manufacturer_name' => $request->manu_name,
+            'tyre_pattern' => $request->pattern_type, // Update to match the form field name
+            'fuel_efficiency' => $request->fuel,
+            'wet_grip' => $request->wet_grip,
+            'road_noise' => $request->road_noise,
+            'size' => $request->size,
+            'tyre_type' => $request->type,
+            'season' => $request->season,
+            'budget_tyres' => $request->has('budget') ? true : false, // Handle checkbox properly
+            'price' => $request->price,
+        ]);
 
-    return redirect()->route('adminProducts');
-}
+        return redirect()->route('adminProducts');
+    }
 
     // public function showProducts(){
 
@@ -84,7 +84,6 @@ class ProductController extends Controller
         $manufacturer = Manufacturer::get();
         $pattern = TyrePattern::get();
         return view('admin.edit-product', compact('product', 'manufacturer', 'pattern'));
-
     }
 
     // UPDATE PRODUCT
@@ -171,7 +170,7 @@ class ProductController extends Controller
         $all = Product::first();
         $all->manufacturer_name = 'All';
         $record = Manufacturer::get();
-        return view('manufacturers', compact('products','record','all'));
+        return view('manufacturers', compact('products', 'record', 'all'));
     }
     public function category($manufacturer = "")
     {
@@ -180,22 +179,98 @@ class ProductController extends Controller
         $all = $products;
         $all->manufacturer_name = $manufacturer;
 
-        return view('manufacturers',compact('products','record','all'));
+        return view('manufacturers', compact('products', 'record', 'all'));
     }
-    public function category_pattern($pattern = ""){
+    public function category_pattern($pattern = "")
+    {
         $products = Product::where('tyre_pattern', $pattern)->get();
         $tyre_pattern = TyrePattern::get();
         $all = $products;
         $all->name = $pattern;
-        return view('tyre-pattren',compact('tyre_pattern','products','all'));
+        return view('tyre-pattren', compact('tyre_pattern', 'products', 'all'));
     }
     public function viewCart($id)
     {
         // Retrieve the product with the specific ID
-        $record = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
 
-        // Pass the product to the 'cart' view
-        return view('cart', compact('record'));
+        // Initialize the cart in the session if it does not exist
+        if (!session()->has('cart')) {
+            session()->put('cart', []);
+        }
+
+        // Get the current cart from the session
+        $cart = session()->get('cart');
+
+        // Append the selected product to the cart
+        // Ensure the product is not already in the cart to avoid duplicates
+        if (!array_key_exists($id, $cart)) {
+            $cart[$id] = $product;
+            session()->put('cart', $cart);
+        }
+
+        // Pass the cart to the 'cart' view
+        return view('cart', ['cart' => $cart]);
     }
 
+    public function checkout()
+    {
+        // Check if the user is logged in
+        if (!auth()->check()) {
+            // Redirect to the login page if not authenticated
+            return redirect()->route('login')->with('warning', 'You need to log in first to proceed to checkout.');
+        }
+
+        // Check if the cart is empty
+        if (!session()->has('cart') || count(session('cart')) === 0) {
+            // Redirect to the cart page with a warning if the cart is empty
+            return redirect()->route('cart')->with('warning', 'Your cart is empty. Add items to your cart before proceeding to checkout.');
+        }
+
+        // The user is authenticated and the cart is not empty, proceed to the checkout page
+        return view('checkout');
+    }
+
+    public function removeFromCart($id)
+    {
+        // Get the current cart from the session
+        $cart = session()->get('cart');
+
+        // Remove the item with the given ID
+        if (array_key_exists($id, $cart)) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+
+        // Redirect back to the cart page
+        return redirect()->route('cart');
+    }
+
+    public function updateCart(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $id = $request->id;
+        $quantity = $request->quantity;
+
+        // Update the quantity in the cart
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = $quantity;
+            session()->put('cart', $cart);
+        }
+
+        // Calculate the updated totals
+        $itemTotal = $cart[$id]['price'] * $quantity;
+        $subtotal = array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart));
+        $total = $subtotal; // You can adjust this if there are any additional charges, taxes, etc.
+
+        // Return JSON response
+        return response()->json([
+            'success' => true,
+            'itemTotal' => number_format($itemTotal, 2),
+            'subtotal' => number_format($subtotal, 2),
+            'total' => number_format($total, 2),
+        ]);
+    }
 }

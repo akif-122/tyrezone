@@ -8,7 +8,6 @@
         <!-- TOP BAR SECTION END -->
  
       
-         </div>
         <!-- REGISTRATION FORM START-->
         <section class="registration form-wrap">
             <div class="container ">

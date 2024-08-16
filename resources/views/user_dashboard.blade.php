@@ -2,10 +2,10 @@
 @php
     $product = \App\Models\Manufacturer::all(); // Fetch products or any data needed in the navbar
 @endphp
-       
-        @includeif("includes.navbar",['product' => $product])
 
-</div>
+@includeif('includes.navbar', ['product' => $product])
+
+
 
 
 <div class="user-dashboard">
@@ -14,13 +14,13 @@
             <div class="col-lg-3">
                 @include('includes.user-sidebar')
             </div>
-            
+
             <div class="col-lg-9 pe-4 my-lg-4">
                 <div class="user-main border rounded my-5">
                     <h5>User Information</h5>
                     <div class="user-profile">
                         @foreach ($users as $user)
-                            <h4 id="userName">{{$user->f_name ." ".  $user->last_name }}</h4>
+                            <h4 id="userName">{{ $user->f_name . ' ' . $user->last_name }}</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p><strong>Email:</strong> <span id="userEmail">{{ $user->email }}</span></p>

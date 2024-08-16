@@ -42,7 +42,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('dashboard') }}" method="POST">
+                <form action="{{ route('dashboard')}}" method="POST">
                     @csrf
                     <div class="col-lg-5 col-md-6 mx-auto sign-up-wrap px-2 px-sm-3">
                         <h5 class="text-center mb-4">Admin Login</h5>

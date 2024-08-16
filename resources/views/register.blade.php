@@ -7,7 +7,6 @@
         @includeif("includes.navbar",['product' => $product])
 
 
-</div>
 <section class="registration form-wrap">
     <div class="container ">
         @if (session('success'))

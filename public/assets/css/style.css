@@ -2962,6 +2962,11 @@ HERO BANNER SECTION START
 .cart-page table tr td {
   vertical-align: middle;
 }
+.cart-page table tr td img{
+  width: 60px;
+  height: 60px;
+object-fit: contain;
+}
 
 .cart-page .quantity button{
   width: 35px;

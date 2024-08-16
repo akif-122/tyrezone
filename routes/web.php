@@ -67,7 +67,7 @@ Route::post('/add_pattern', [ManufacturerController::class, 'save_tyre_pattern']
 Route::delete('/delete_pattern', [ManufacturerController::class, 'delete_tyre_pattern'])->name('delete_tyre_pattern');
 Route::post('/dashboard', [AdminController::class, 'login'])->name('dashboard');
 // Route::get('/dashIndex', [AdminController::class, 'dashIndex'])->name('dashIndex');
-Route::get('/logout', [AdminController::class, 'logout']);
+Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 Route::get('/adminOrders', function () {
     return view('admin/orders');
 });
@@ -93,7 +93,7 @@ Route::view("/about", "about")->name("about");
 Route::view("/blog-detail", "blog-detail")->name("blog-detail");
 Route::view("/blogs", "blogs")->name("blogs");
 Route::view("/booking", "booking")->name("booking");
-Route::view("/checkout", "checkout")->name("checkout");
+Route::get("/checkout",[ProductController::class,'checkout'])->name("checkout");
 Route::view("/contact", "contact")->name("contact");
 Route::view("/edit-profile", "edit-profile")->name("edit-profile");
 Route::view("/forget-password", "forget-password")->name("forget-password");
@@ -105,7 +105,12 @@ Route::view("/services", "services")->name("services");
 // Route::view("/tyre-pattern", [ManufacturerController::class,'tyre-pattern'])->name("tyre-pattern");
 Route::get("/index-pattern", [ManufacturerController::class,'render_pattern'])->name("index-pattern");
 Route::get("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
-Route::post("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
+Route::delete('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
+// Route::post("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
+Route::view('/cart','cart')->name('cart');
+Route::post('/cart/update', [ProductController::class, 'updateCart'])->name('cart.update');
+
+
 
 
 
