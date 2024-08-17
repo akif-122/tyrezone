@@ -40,7 +40,23 @@
 
 
         <!-- GALLERY SECION START -->
-        <section class="gallery my-3 py-5">
+        <section class="gallery pb-5">
+
+            <div class="gallery-img-slider owl-carousel owl-theme">
+                <div class="slide-img">
+                    <img src="{{ asset('assets/imgs/gallery/slide1.jpg') }}" width="100%" alt="">
+                </div>
+                <div class="slide-img">
+                    <img src="{{ asset('assets/imgs/gallery/slide2.jpg') }}" width="100%" alt="">
+                </div>
+                <div class="slide-img">
+                    <img src="{{ asset('assets/imgs/gallery/slide4.jpg') }}" width="100%" alt="">
+                </div>
+                <div class="slide-img">
+                    <img src="{{ asset('assets/imgs/gallery/slide3.jpg') }}" width="100%" alt="">
+                </div>
+            </div>
+            
             <h1 class="text-center mb-4">Gallery</h1>
             <div class="container">
                 <div class="row " id="gallery">
@@ -136,7 +152,9 @@
     <!-- CUSTOM JS -->
     <script src="assets/js/app.js"></script>
 
-    <script></script>
+    <script>
+
+    </script>
 </body>
 
 </html>

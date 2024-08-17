@@ -23,11 +23,11 @@ use App\Http\Controllers\DashboardController;
 use Faker\Guesser\Name;
 
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/admin/products', [ProductController::class, 'showInfo'])->name("adminProducts");
     Route::get('/admin/dashboard', [DashboardController::class, 'dash'])->name('adminDashboard');
     Route::get("admin/tyre-pattren", [ManufacturerController::class, "tyre_pattern"])->name("adminTyrepattren");
-});
+// });
 
 Route::get('/change_password', function(){
     return view('change_password');
@@ -49,7 +49,7 @@ Route::get('/addManufacture', function () {
 });
 Route::get('/adminIndex', function () {
     return view('admin/index');
-});
+})->name('adminIndex');
 Route::get("/manufacturersHome", [ProductController::class, 'render'])->name("manufacturers");
 Route::get("/manufacturers/{manufacturer}", [ProductController::class, 'category'])->name("manufacturer");
 Route::get("/pattern/{pattern}", [ProductController::class, 'category_pattern'])->name("pattern");

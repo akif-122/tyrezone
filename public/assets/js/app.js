@@ -120,6 +120,24 @@
 
             }
         });
+        $('.gallery-img-slider').owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            margin: 0,
+            dots: true,
+            nav: true,
+            items: 1,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                
+
+            }
+        });
 
 
         $('#logo-slides').owlCarousel({
@@ -171,6 +189,9 @@
 
             }
         });
+
+
+
 
           // GALLERY PAGE LIGHT BOX
           lightbox.option({

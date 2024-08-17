@@ -2553,8 +2553,96 @@ HERO BANNER SECTION START
     CART SECTION END
 ==========================================
 */
-
 /* ===========================================    BOOKING   ============================================= */
+
+/* ===========================================    GALLERY PAGE   ============================================= */
+.gallery{
+  margin-bottom: 70px;
+}
+.gallery .gallery-img-slider {
+  position: relative;
+  margin-bottom: 100px;
+}
+.gallery .gallery-img-slider .slide-img{
+  height: calc(100vh - 50px);
+  overflow: hidden;
+}
+.gallery .gallery-img-slider .slide-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.gallery .gallery-img-slider  .owl-nav{
+  height: auto !important;
+  padding: 0 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-60%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  overflow: hidden;
+}
+.gallery .gallery-img-slider  .owl-nav button{
+  all: unset;
+  height: 50px !important;
+  pointer-events: all;
+  opacity: 1;
+
+  cursor: pointer;
+}
+.gallery .gallery-img-slider  .owl-nav button span{
+  all: unset;
+  height: 30px;
+  line-height: .4;
+  font-size: 100px;
+  color: var(--primary-blue);
+  display: inline-block;
+  transition: .5s ease;
+}
+.gallery .gallery-img-slider  .owl-nav button:hover span{
+  color: var(--white);
+}
+.gallery .gallery-img-slider  .owl-nav button:hover{
+  background-color: transparent;
+}
+.gallery .gallery-img-slider  .owl-dots {
+  position: absolute;
+  z-index: 100;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.gallery .gallery-img-slider  .owl-dots button {
+  background-color: transparent !important;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+}
+.gallery .gallery-img-slider  .owl-dots button span {
+  all: unset;
+  display: block;
+  width: 8px !important;
+  height: 8px !important;
+  margin: 5px 5px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  background: transparent !important;
+  border: solid var(--white) 2px;
+  opacity: 1;
+  transition: 0.4s ease;
+}
+.gallery .gallery-img-slider  .owl-dots button.active span {
+  background-color: var(--white) !important;
+}
+
+/* ===========================================    GALLERY PAGE END   ============================================= */
+
+
 
 /* ===========================================    CHECKOUT PAGE   ============================================= */
 

@@ -10,6 +10,15 @@
 
 <div class="user-dashboard">
     <div class="">
+        <!-- HERO BANNER SECTION START -->
+        <section class="hero-banner user-profile-banner overlay" style="background-image: url({{ asset('assets/imgs/profile-bg.jpg') }});">
+            <div class="container">
+                <div class="banner-text text-center">
+                    <h1>Welcome Back  @foreach ($users as $user) {{ $user->f_name . " " . $user->last_name."!"}} @endforeach </h1>
+                </div>
+            </div>
+        </section>
+        <!-- HERO BANNER SECTION END -->
         <div class="row">
             <div class="col-lg-3">
                 @include('includes.user-sidebar')

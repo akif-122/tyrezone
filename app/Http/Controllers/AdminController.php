@@ -59,8 +59,11 @@ class AdminController extends Controller
             'users_count' => $usersCount,
         ]);
             // Redirect to the dashboard with a success message
+            if(auth()->check())
             return redirect()->route("adminDashboard");
             // return view('admin.dashboard',compact('manufacturers','pattern','product'));
+            else
+            return redirect()->route("adminIndex");
 
     }
 // If authentication fails, throw a validation exception with a custom message
