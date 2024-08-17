@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
 
     <!-- OWL CAROUSEL  -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
@@ -32,11 +31,90 @@
 
             <div class="main-wrap" id="mainArea">
 
-            @includeIf('admin.includes.topbar')
+                @includeIf('admin.includes.topbar')
 
-                
-              
+
+
                 <div class="content-area mt-5">
+
+                    <div class="row">
+
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Total Orders
+                                    </h4>
+                                    <h5>145</h5>
+                                    <i class="fa-solid fa-shop"></i>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Pending</h4>
+                                    <h5>45</h5>
+                                    <i class="fa-solid fa-clock-rotate-left"></i>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Confirmed</h4>
+                                    <h5>425</h5>
+                                    <i class="fa-solid fa-clipboard-check"></i>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Invalid</h4>
+                                    <h5>5</h5>
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Rejected</h4>
+                                    <h5>51</h5>
+                                    <i class="fa-solid fa-ban"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Not Available
+                                    </h4>
+                                    <h5>11</h5>
+                                    <i class="fa-solid fa-cart-arrow-down"></i>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-xl-3 col-sm-6 mb-3">
+                            <a href="#">
+                                <div class="dash-card">
+                                    <h4>Delivered
+                                    </h4>
+                                    <h5>1231</h5>
+                                    <i class="fa-solid fa-box"></i>
+                                </div>
+                            </a>
+                        </div>
+
+
+                    </div>
+
+
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="m-0">Orders</h5>
 
@@ -60,6 +138,7 @@
                                     <th>Postcode</th>
                                     <th>Qty</th>
                                     <th>Price</th>
+                                    <th>Status</th>
 
                                 </tr>
                             </thead>
@@ -81,6 +160,15 @@
                                         24420 </td>
                                     <td>4</td>
                                     <td>40000</td>
+                                    <td>
+                                        <select class="border-0 outline-0">
+                                            <option value="">Pending</option>
+                                            <option value="">Confirmed</option>
+                                            <option value="">Invalid</option>
+                                            <option value="">Not Available</option>
+                                            <option value="">Delivered</option>
+                                        </select>
+                                    </td>
 
                                 </tr>
                             </tbody>
@@ -111,16 +199,15 @@
         let mainArea = document.getElementById("mainArea");
         let closeBtn = document.getElementById("sideCloseBtn");
 
-        sideToggler.addEventListener("click", function (e) {
+        sideToggler.addEventListener("click", function(e) {
             sideBar.classList.toggle("none")
             mainArea.classList.toggle("side-none")
         })
 
-        closeBtn.addEventListener("click", function (e) {
+        closeBtn.addEventListener("click", function(e) {
             sideBar.classList.remove("none")
             mainArea.classList.remove("side-none")
         })
-
     </script>
 
 </body>

@@ -42,9 +42,9 @@
                 <div class="content-area mt-5">
 
 
-                    <div class="row">
+                    <div class="row dashboard">
                        
-                        <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="col-xl col-md-4 px-1 col-sm-6 mb-3">
                              <a href="{{route('adminProducts')}}">
                                 <div class="dash-card">
                                 <h4>Products</h4>
@@ -54,7 +54,7 @@
                              </a>
                         </div>
 
-                        <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="col-xl col-md-4 px-1 col-sm-6 mb-3">
                             <a href="{{route('adminTyrepattren')}}">
                                 <div class="dash-card">
                                 <h4>Patteren</h4>
@@ -65,7 +65,7 @@
                             
                         </div>
 
-                        <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="col-xl col-md-4 px-1 col-sm-6 mb-3">
                             <a href="{{route('adminManufacturers')}}">
                             <div class="dash-card">
                                 <h4>Manufacturers</h4>
@@ -74,12 +74,21 @@
                             </div>
                             </a>
                         </div>
-                        <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="col-xl col-md-4 px-1 col-sm-6 mb-3">
                             <a href="{{route('adminUsers')}}">
                             <div class="dash-card">
                                 <h4>Users</h4>
                                 <h5>{{$usersCount}}</h5>
                                 <i class="fa-solid fa-users"></i>
+                            </div>
+                            </a>
+                        </div>
+                        <div class="col-xl col-md-4 px-1 col-sm-6 mb-3">
+                            <a href="#">
+                            <div class="dash-card">
+                                <h4>Orders</h4>
+                                <h5>45</h5>
+                                <i class="fa-solid fa-cart-flatbed"></i>
                             </div>
                             </a>
                         </div>
