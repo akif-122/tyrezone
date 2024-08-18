@@ -65,6 +65,8 @@
                                             @foreach (session('cart', []) as $id => $product)
                                                 @php
                                                     $quantity = intval($product['quantity']);
+                                                    if($quantity==0)
+                                                    $quantity = $quantity+1;
                                                     $price = floatval($product['price']);
                                                     $itemTotal = $price * $quantity;
                                                     $total += $itemTotal;

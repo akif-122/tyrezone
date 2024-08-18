@@ -21,94 +21,28 @@
     <!-- TOP BAR SECTION END -->
 
     <!-- SIDE CART -->
-    <div class="side-cart" id="side-cart">
-
-
-        <div class="side-card-header  d-flex align-items-center justify-content-between">
-            <button class="cart-close" id="cart-close"><i class="fa-regular fa-circle-xmark"></i></button>
-            <h5 class="m-0">Your Cart</h5>
-            <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-
-
-        <div class="cart border-0">
-            <div class="cart-item d-flex ">
-                <div class="img">
-                    <img src="assets/imgs/tyres/econodrive.jpg" width="40px" alt="">
-                </div>
-                <div class="item-detail">
-                    <p class="title">Summer Tyre Dunlop ECONO DRIVE 225/55</p>
-
-                    <div class="d-flex  align-items-center justify-content-between">
-                        <div class="qty-wrap d-flex align-items-center">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input type="text" min="1" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <p class=" price">£ 127.05</p>
-                    </div>
-
-                </div>
-                <a href="#" class="ms-auto remove-icon"><i class="fa-solid fa-xmark"></i></a>
-            </div>
-
-            <div class="cart-item d-flex ">
-                <div class="img">
-                    <img src="assets/imgs/tyres/econodrive.jpg" width="40px" alt="">
-                </div>
-                <div class="item-detail">
-                    <p class="title">Summer Tyre Dunlop ECONO DRIVE 225/55</p>
-
-                    <div class="d-flex  align-items-center justify-content-between">
-                        <div class="qty-wrap d-flex align-items-center">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input type="text" min="1" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <p class=" price">£ 127.05</p>
-                    </div>
-
-                </div>
-                <a href="#" class="ms-auto remove-icon"><i class="fa-solid fa-xmark"></i></a>
-            </div>
-
-            <div class="cart-item d-flex ">
-                <div class="img">
-                    <img src="assets/imgs/tyres/econodrive.jpg" width="40px" alt="">
-                </div>
-                <div class="item-detail">
-                    <p class="title">Summer Tyre Dunlop ECONO DRIVE 225/55</p>
-
-                    <div class="d-flex  align-items-center justify-content-between">
-                        <div class="qty-wrap d-flex align-items-center">
-                            <button><i class="fa-solid fa-minus"></i></button>
-                            <input type="text" min="1" value="1">
-                            <button><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <p class=" price">£ 127.05</p>
-                    </div>
-
-                </div>
-                <a href="#" class="ms-auto remove-icon"><i class="fa-solid fa-xmark"></i></a>
-            </div>
-
-
-
-
-
-        </div>
-
-        <div class="cart-btns">
-            <div class="text-end ">
-                <h6 class="mb-3">Total <strong>£127.05</strong></h6>
-            </div>
-            <div class=" d-flex justify-content-between">
-                <a href="{{ route("MainCart", ["id"=>4]) }}" class="main-btn">View Cart</a>
-                <a href="{{route("checkout")}}" class="main-btn">Checkout</a>
-            </div>
-        </div>
-
+    <div class="side-cart" id="side-cart" style="display: block;">
+    <div class="side-card-header d-flex align-items-center justify-content-between">
+        <button class="cart-close" id="cart-close"><i class="fa-regular fa-circle-xmark"></i></button>
+        <h5 class="m-0">Your Cart</h5>
+        <i class="fa-solid fa-cart-shopping"></i>
     </div>
+
+    <div class="cart border-0">
+        <!-- Cart items will be dynamically inserted here -->
+    </div>
+
+    <div class="cart-btns">
+        <div class="text-end">
+            <h6 class="mb-3">Total <strong>£0.00</strong></h6>
+        </div>
+        <div class="d-flex justify-content-between">
+            <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
+            <a href="{{ route('checkout') }}" class="main-btn">Checkout</a>
+        </div>
+    </div>
+</div>
+
     <!-- SIDE END -->
 
 
@@ -211,3 +145,94 @@
     </nav>
     <!-- NAVBAR SECTION END -->
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle the side cart
+    document.getElementById('side-cart-toggler').addEventListener('click', function() {
+        var sideCart = document.getElementById('side-cart');
+        sideCart.style.display = sideCart.style.display === 'none' ? 'block' : 'none';
+        fetchCart();
+    });
+
+    function fetchCart() {
+        fetch('{{ route('fetchCart') }}')
+            .then(response => response.json())
+            .then(data => {
+                updateSideCart(data.cart);
+                updateCartIcon(data.cart.countElement);
+            });
+    }
+
+    function updateSideCart(cart) {
+        const cartContainer = document.querySelector('#side-cart .cart');
+        const countElement = document.getElementById('count');
+        cartContainer.innerHTML = ''; // Clear existing cart items
+        let total = 0;
+
+        for (const [id, product] of Object.entries(cart)) {
+            const item = document.createElement('div');
+            item.className = 'cart-item d-flex';
+            item.innerHTML = `
+                <div class="img">
+                    <img src="${product.image}" width="40px" alt="">
+                </div>
+                <div class="item-detail">
+                    <p class="title">${product.name}</p>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="qty-wrap d-flex align-items-center">
+                            <button onclick="updateQuantity(${id}, 'decrease')"><i class="fa-solid fa-minus"></i></button>
+                            <input type="text" min="1" value="${product.quantity || 1}" readonly> <!-- Default to 1 if undefined -->
+                            <button onclick="updateQuantity(${id}, 'increase')"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <p class="price">£${product.price}</p>
+                    </div>
+                </div>
+                <a href="#" class="ms-auto remove-icon" onclick="removeFromCart(${id})"><i class="fa-solid fa-xmark"></i></a>
+            `;
+            cartContainer.appendChild(item);
+            total += product.price * (product.quantity || 1); // Default to 1 if undefined
+        }
+
+        countElement.textContent = Object.keys(cart).length;
+        document.querySelector('#side-cart .cart-btns .text-end strong').textContent = `£${total.toFixed(2)}`;
+    }
+
+    function updateCartIcon(totalItems) {
+        const countElement = document.getElementById('count');
+        countElement.textContent = totalItems;
+    }
+
+    window.updateQuantity = function(productId, action) {
+        fetch('{{ route('updateCart') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ product_id: productId, action: action })
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateSideCart(data.cart);
+            updateCartIcon(data.totalItems);
+        });
+    }
+
+    window.removeFromCart = function(productId) {
+        fetch('{{ route('removeFromCart') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ product_id: productId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateSideCart(data.cart);
+            updateCartIcon(data.totalItems);
+        });
+    }
+});
+
+</script>

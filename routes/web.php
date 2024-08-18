@@ -109,6 +109,15 @@ Route::delete('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])
 // Route::post("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
 Route::view('/cart','cart')->name('cart');
 Route::post('/cart/update', [ProductController::class, 'updateCart'])->name('cart.update');
+// Route to fetch the current cart
+Route::get('/fetch-cart', [ProductController::class, 'fetchCart'])->name('fetchCart');
+
+// Route to update cart (increase or decrease quantity)
+Route::post('/update-cart', [ProductController::class, 'updateSideCart'])->name('updateCart');
+
+// Route to remove an item from the cart
+Route::post('/remove-from-cart', [ProductController::class, 'removeFromSideCart'])->name('removeFromCart');
+
 
 
 

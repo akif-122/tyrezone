@@ -273,4 +273,66 @@ class ProductController extends Controller
             'total' => number_format($total, 2),
         ]);
     }
+    // CartController.php
+    // CartController.php
+
+    public function fetchCart()
+    {
+        return response()->json(['cart' => session()->get('cart', [])]);
+    }
+
+    public function updateSideCart(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $action = $request->input('action');
+        $cart = session()->get('cart', []);
+
+        // Initialize product if not present in the cart
+        if (!isset($cart[$productId])) {
+            $cart[$productId] = [
+                'quantity' => 1, // Initialize to 1
+                'price' => $request->input('price'),
+                'name' => $request->input('name'),
+                'image' => $request->input('image')
+            ];
+        }
+
+        if (isset($cart[$productId])) {
+            if ($action == 'increase') {
+                $cart[$productId]['quantity'] += 1;
+            } elseif ($action == 'decrease'
+            ) {
+                if ($cart[$productId]['quantity'] > 1) {
+                    $cart[$productId]['quantity'] -= 1;
+                } else {
+                    unset($cart[$productId]);
+                }
+            }
+            session()->put('cart', $cart);
+        }
+
+        return response()->json([
+            'success' => true,
+            'cart' => $cart,
+            'totalItems' => array_sum(array_column($cart, 'quantity')) // Total number of items in the cart
+        ]);
+    }
+
+
+
+
+    public function removeFromSideCart(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]);
+            session()->put('cart', $cart);
+        }
+
+        return response()->json(['success' => true, 'cart' => $cart]);
+    }
+
+
 }
