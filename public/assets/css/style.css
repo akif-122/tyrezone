@@ -1703,9 +1703,21 @@ ORDER STEP SECTION END
   height: 25px;
   object-fit: contain;
 }
+
+.footer .footer-bottom p {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.footer .footer-bottom p span{
+  color: var(--dark-orange);
+}
+.footer .footer-bottom p strong{
+  font-weight: 600;
+}
 .footer .footer-bottom p a{
   color: #fff;
-  text-decoration: underline;
+  /* letter-spacing: 1px; */
 }
 .footer .footer-bottom p a:hover{
   color: var(--primary-blue);
