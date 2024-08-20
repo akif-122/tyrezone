@@ -205,13 +205,30 @@ class ProductController extends Controller
         // Append the selected product to the cart
         // Ensure the product is not already in the cart to avoid duplicates
         if (!array_key_exists($id, $cart)) {
-            $cart[$id] = $product;
+            // Wrap product details in an object
+            $cart[$id] = [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'price' => $product->price,
+                    'image' => $product->image,
+                    'season' => $product->season,  // Add season
+                    'manufacturer_name' => $product->manufacturer_name,  // Add manufacturer name
+                    'size' => $product->size,  // Add size
+                    'quantity' => 1, // Default quantity
+                ];
+            session()->put('cart', $cart);
+        } else {
+            // Increment the quantity if the product is already in the cart
+            $cart[$id]['quantity']++;
             session()->put('cart', $cart);
         }
 
         // Pass the cart to the 'cart' view
         return view('cart', ['cart' => $cart]);
     }
+
+
+
 
     public function checkout()
     {
@@ -278,8 +295,20 @@ class ProductController extends Controller
 
     public function fetchCart()
     {
-        return response()->json(['cart' => session()->get('cart', [])]);
+        // Get the cart from the session
+        $cart = session()->get('cart', []);
+
+        // Calculate the total number of unique items in the cart
+        $totalItems = count($cart); // Unique items based on the keys of the cart array
+
+        // Return the cart and total items as a JSON response
+        return response()->json([
+            'cart' => $cart,
+            'totalItems' => $totalItems,
+        ]);
     }
+
+
 
     public function updateSideCart(Request $request)
     {

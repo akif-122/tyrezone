@@ -1,6 +1,29 @@
+<style>
+    /* Ensure the side cart is properly positioned above other content */
+/* 
+/* Ensure the side cart toggler (cart icon) is above other content */
+
+.cart-btns .main-btn {
+    background-color: #FFA500; /* Change to your desired color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding around the buttons */
+    border: none; /* Remove default border */
+    width: 48%; /* Ensure the buttons fit side by side */
+    text-align: center; /* Center the text */
+    font-size: 14px; /* Adjust font size */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.cart-btns .main-btn:hover {
+    background-color: #e69500; /* Darken color on hover */
+}
+
+
+</style>
 <div class="header p-0">
     <!-- TOP BAR SECTION START -->
-    <section class="top-bar  ">
+    <section class="top-bar">
         <div class="container-xl d-flex align-items-center justify-content-between">
             <ul class="m-0 d-flex flex-wrap align-items-center list-unstyled">
                 <li><a href="tel:07563896325"><i class="fa-solid fa-phone"></i> 07563 896325</a></li>
@@ -21,7 +44,7 @@
     <!-- TOP BAR SECTION END -->
 
     <!-- SIDE CART -->
-    <div class="side-cart" id="side-cart" style="display: block;">
+<div class="side-cart" id="side-cart">
     <div class="side-card-header d-flex align-items-center justify-content-between">
         <button class="cart-close" id="cart-close"><i class="fa-regular fa-circle-xmark"></i></button>
         <h5 class="m-0">Your Cart</h5>
@@ -33,14 +56,15 @@
     </div>
 
     <div class="cart-btns">
-        <div class="text-end">
-            <h6 class="mb-3">Total <strong>£0.00</strong></h6>
-        </div>
-        <div class="d-flex justify-content-between">
-            <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
-            <a href="{{ route('checkout') }}" class="main-btn">Checkout</a>
-        </div>
+    <div class="text-end">
+        <h6 class="mb-3">Total <strong>£0.00</strong></h6>
     </div>
+    <div class="d-flex justify-content-between">
+        <a href="{{ route('cart') }}" class="main-btn">View Cart</a>
+        <a href="{{ route('checkout') }}" class="main-btn">Checkout</a>
+    </div>
+</div>
+
 </div>
 
     <!-- SIDE END -->
@@ -130,12 +154,13 @@
 
                 <div
                     class="h-icon-box cart-box d-flex flex-column justify-content-center align-items-end align-items-sm-center ">
-                    <a href="#" class="">
-                        <div class="icon" id="side-cart-toggler">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <span id="count">0</span>
-                        </div>
-                    </a>
+                    <!-- Cart Icon -->
+<a href="#" class="">
+    <div class="icon" id="side-cart-toggler">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="count">0</span>
+    </div>
+</a>
 
 
                 </div>
@@ -147,25 +172,37 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Toggle the side cart
-    document.getElementById('side-cart-toggler').addEventListener('click', function() {
-        var sideCart = document.getElementById('side-cart');
-        sideCart.style.display = sideCart.style.display === 'none' ? 'block' : 'none';
-        fetchCart();
-    });
+    // const sideCartToggler = document.getElementById('side-cart-toggler');
+    // const sideCart = document.getElementById('side-cart');
+    // const cartCloseButton = document.getElementById('cart-close');
+
+    // // Toggle the side cart on a single click
+    // sideCartToggler.addEventListener('click', function(event) {
+    //     event.preventDefault(); // Prevent any default action associated with the link
+    //     const isCartVisible = sideCart.style.display === 'block';
+    //     sideCart.style.display = isCartVisible ? 'none' : 'block';
+    //     sideCartToggler.style.display = isCartVisible ? 'block' : 'none'; // Hide the cart icon when side cart is shown
+        
+    //     if (!isCartVisible) {
+    //     }
+    // });
+    fetchCart(); // Fetch cart data only when showing the cart
+
+    // Close the side cart
+   
 
     function fetchCart() {
         fetch('{{ route('fetchCart') }}')
             .then(response => response.json())
             .then(data => {
                 updateSideCart(data.cart);
-                updateCartIcon(data.cart.countElement);
-            });
+                updateCartIcon(data.totalItems);
+            })
+            .catch(error => console.error('Error fetching cart:', error));
     }
 
     function updateSideCart(cart) {
         const cartContainer = document.querySelector('#side-cart .cart');
-        const countElement = document.getElementById('count');
         cartContainer.innerHTML = ''; // Clear existing cart items
         let total = 0;
 
@@ -193,13 +230,21 @@ document.addEventListener('DOMContentLoaded', function() {
             total += product.price * (product.quantity || 1); // Default to 1 if undefined
         }
 
-        countElement.textContent = Object.keys(cart).length;
         document.querySelector('#side-cart .cart-btns .text-end strong').textContent = `£${total.toFixed(2)}`;
     }
 
     function updateCartIcon(totalItems) {
         const countElement = document.getElementById('count');
-        countElement.textContent = totalItems;
+        countElement.innerHTML = totalItems;
+    }
+
+    function updateCartCount() {
+        fetch('{{ route('fetchCart') }}')
+            .then(response => response.json())
+            .then(data => {
+                updateCartIcon(data.totalItems);
+            })
+            .catch(error => console.error('Error fetching cart count:', error));
     }
 
     window.updateQuantity = function(productId, action) {
@@ -214,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             updateSideCart(data.cart);
-            updateCartIcon(data.totalItems);
+            updateCartCount(); // Update the cart count after updating quantity
         });
     }
 
@@ -230,9 +275,28 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             updateSideCart(data.cart);
-            updateCartIcon(data.totalItems);
+            updateCartCount(); // Update the cart count after removing item
+        });
+    }
+
+    // Update cart icon when a new product is added
+    window.addToCart = function(productId) {
+        fetch('{{ route('fetchCart') }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ product_id: productId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateSideCart(data.cart);
+            updateCartCount(); // Update the cart count after adding product
         });
     }
 });
+
+
 
 </script>

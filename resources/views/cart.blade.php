@@ -14,8 +14,7 @@
 
     <!-- OWL CAROUSEL -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -62,65 +61,55 @@
                                                 $total = 0;
                                             @endphp
 
-                                            @foreach (session('cart', []) as $id => $product)
+                                            @foreach (session('cart', []) as $id => $cartItem)
                                                 @php
-                                                    $quantity = intval($product['quantity']);
-                                                    if($quantity==0)
-                                                    $quantity = $quantity+1;
-                                                    $price = floatval($product['price']);
+                                                    $quantity = max(1, intval($cartItem['quantity'])); // Ensure at least 1
+                                                    $price = floatval($cartItem['price']);
                                                     $itemTotal = $price * $quantity;
                                                     $total += $itemTotal;
                                                 @endphp
 
-
                                                 <tr>
                                                     <td class="text-center">
-                                                        <img src="{{ $product['image'] }}" alt="image"
-                                                            class="serviceicon" width="65">
+                                                        <img src="{{ $cartItem['image'] }}" alt="image" class="serviceicon" width="65">
                                                     </td>
                                                     <td data-th="Product Name:" class="text-left">
-                                                        {{ $product['season'] }} Tyre
-                                                        {{ $product['manufacturer_name'] }} DRIVE {{ $product['size'] }}
+                                                        {{ $cartItem['season'] ?? 'N/A' }} Tyre {{ $cartItem['manufacturer_name'] ?? 'N/A' }} DRIVE {{ $cartItem['size'] ?? 'N/A' }}
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="quantity">
-                                                            <div class="d-flex ">
-                                                                <button class="main-btn decrease-quantity"
-                                                                    data-id="{{ $id }}"><i
-                                                                        class="fa-solid fa-minus"></i></button>
-                                                                <input type="text" min="1"
-                                                                    value="{{ $quantity }}" class="quantity-input"
-                                                                    data-id="{{ $id }}" readonly>
-                                                                <button class="main-btn increase-quantity"
-                                                                    data-id="{{ $id }}"><i
-                                                                        class="fa-solid fa-plus"></i></button>
+                                                            <div class="d-flex">
+                                                                <button class="main-btn decrease-quantity" data-id="{{ $id }}">
+                                                                    <i class="fa-solid fa-minus"></i>
+                                                                </button>
+                                                                <input type="text" min="1" value="{{ $quantity }}" class="quantity-input" data-id="{{ $id }}" readonly>
+                                                                <button class="main-btn increase-quantity" data-id="{{ $id }}">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td data-th="Unit Price:" class="text-right">
-                                                        £{{ $product['price'] }}</td>
-                                                    <td data-th="Total:" class="text-right item-total"
-                                                        id="item-total-{{ $id }}">£{{ $itemTotal }}</td>
+                                                    <td data-th="Unit Price:" class="text-right">£{{ number_format($price, 2) }}</td>
+                                                    <td data-th="Total:" class="text-right item-total" id="item-total-{{ $id }}">
+                                                        £{{ number_format($itemTotal, 2) }}
+                                                    </td>
                                                     <td class="text-start">
                                                         <form action="{{ route('cart.remove', $id) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="remove"><i
-                                                                    class="fa-solid fa-trash-can"></i></button>
+                                                            <button type="submit" class="remove"><i class="fa-solid fa-trash-can"></i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
 
                                             <tr class="hidden-xs">
-                                                <td colspan="5" class="text-end"><strong>Sub-Total:</strong></td>
-                                                <td colspan="5" class="text-end" id="subtotal">£{{ $total }}
-                                                </td>
+                                                <td colspan="4" class="text-end"><strong>Sub-Total:</strong></td>
+                                                <td colspan="2" class="text-end" id="subtotal">£{{ number_format($total, 2) }}</td>
                                             </tr>
                                             <tr class="hidden-xs">
-                                                <td colspan="5" class="text-end"><strong>Total:</strong></td>
-                                                <td colspan="5" class="text-end" id="total">£{{ $total }}
-                                                </td>
+                                                <td colspan="4" class="text-end"><strong>Total:</strong></td>
+                                                <td colspan="2" class="text-end" id="total">£{{ number_format($total, 2) }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -144,15 +133,12 @@
             </div>
         </div>
 
-        @php
-            $product = \App\Models\Manufacturer::all();
-        @endphp
-
         @includeIf('includes.footer', ['product' => $product])
     </div>
 
     <!-- BOOTSTRAP 5 JS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset("assets/js/app.js") }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -194,7 +180,7 @@
             $('.decrease-quantity').on('click', function() {
                 let input = $(this).siblings('input');
                 let quantity = parseInt(input.val()) - 1;
-                if (quantity < 1) quantity = 1;
+                if (quantity < 1) quantity = 1; // Prevent going below 1
                 input.val(quantity);
 
                 let id = $(this).data('id');
