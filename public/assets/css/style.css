@@ -1703,6 +1703,13 @@ ORDER STEP SECTION END
   height: 25px;
   object-fit: contain;
 }
+.footer .footer-bottom p a{
+  color: #fff;
+  text-decoration: underline;
+}
+.footer .footer-bottom p a:hover{
+  color: var(--primary-blue);
+}
 /* 
 ===============================================
       FOOTER SECTION END   

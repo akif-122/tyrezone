@@ -66,7 +66,7 @@
 
 
         <div class="footer-bottom d-flex align-items-center justify-content-center flex-column">
-            <p class="mb-0">© TYRE ZONE TYRES LTD 2024. All Rights Reserved.</p>
+            <p class="mb-0">©Copyright Tyre Zone 2024 - <strong>Made with ❤ in the UK by <a href="https://webspires.co.uk/?utm_campaign=tyrezone" target="_blank">Webspires</a></strong> </p>
             <!-- <div class="d-flex align-items-center justify-content-center flex-wrap gap-1">
             <div class="">
                 <img src="assets/imgs/payzone.png" alt="">

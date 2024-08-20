@@ -86,10 +86,10 @@
                 <button id="navClose" class="navClose d-block d-lg-none"><i
                         class="fa-regular fa-circle-xmark"></i></button>
                 <ul class="navbar-nav pt-4 pt-lg-0">
-                    <li><a href="{{route("home")}}" class="active">Home</a></li>
+                    <li><a href="{{route("home")}}" class="{{ Route::is("home") ? "active": "" }} ">Home</a></li>
 
                     <li class="dropdown mega-dropdown">
-                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle">
+                        <a href="#" class="{{ Route::is("manufacturer") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
                             TYRE MANUFACTURERS</a>
 
                         <div class="dropdown-menu mega-dropdown-menu">
@@ -105,7 +105,7 @@
                     </li>
 
                     <li class="dropdown mega-dropdown">
-                        <a href="#" data-bs-toggle="dropdown" class="dropdown-toggle">
+                        <a href="#" class="{{ Route::is("services") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
                             Services</a>
 
                         <div class="dropdown-menu mega-dropdown-menu">
@@ -140,10 +140,10 @@
                         </div>
                     </li>
 
-                    <li><a href="{{route("gallery")}}">Gallery</a></li>
-                    <li><a href="{{route("blogs")}}">Blog</a></li>
-                    <li><a href="{{route("about")}}">About</a></li>
-                    <li><a href="{{route("contact")}}">Contact</a></li>
+                    <li><a href="{{route("gallery")}}" class="{{ Route::is("gallery") ? "active": "" }} ">Gallery</a></li>
+                    <li><a href="{{route("blogs")}}" class="{{ Route::is("blogs") ? "active": "" }} ">Blog</a></li>
+                    <li><a href="{{route("about")}}" class="{{ Route::is("about") ? "active": "" }} ">About</a></li>
+                    <li><a href="{{route("contact")}}" class="{{ Route::is("contact") ? "active": "" }} ">Contact</a></li>
 
 
                 </ul>

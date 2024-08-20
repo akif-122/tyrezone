@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETYRE ZONE Tyeres</title>
+    <title>Tyre Zone | New & Part Worn Tyres | Tyres in Manchester</title>
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -41,25 +41,8 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        <aside class="side-bar">
-                            <h3>Akif Ullah</h3>
+                        @include('includes.user-sidebar')
 
-                            <ul>
-                                <li><a href="user-dashboard.html"><i class="fa-solid fa-user"></i>
-                                        Profile</a></li>
-                                <li><a href="user-change-password.html" class=""><i
-                                            class="fa-solid fa-lock"></i>
-                                        Change Password</a></li>
-
-                                <li><a class="active" href="orders.html"><i class="fa-solid fa-cart-flatbed"></i>
-                                        My Orders</a>
-                                </li>
-
-                                <li><a href="php/logout.html"><i class="fa-solid fa-right-from-bracket"></i>
-                                        Logout</a>
-                                </li>
-                            </ul>
-                        </aside>
                     </div>
 
                     <div class="col-lg-9 pe-4 my-lg-4">
