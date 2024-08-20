@@ -2833,7 +2833,7 @@ HERO BANNER SECTION START
   margin: 50px 0;
 }
 .contacts .contact-label {
-  background: #293c4f;
+  background: var(--primary-blue);
   font-size: 16px;
   text-transform: uppercase;
   padding: 10px 30px 10px 20px;
@@ -2850,7 +2850,7 @@ HERO BANNER SECTION START
   left: 100%;
   top: 0;
   border-top: 37px solid transparent;
-  border-left: 25px solid #293c4f;
+  border-left: 25px solid var(--primary-blue);
   /* border-bottom: 0 solid transparent; */
 }
 
