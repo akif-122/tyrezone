@@ -37,7 +37,7 @@
                     <li><a href="{{ route('contact') }}">Buckley Transport, The Old Gas Works, Higginshaw Lane, Oldham,
                             OL2
                             6HQ</a></li>
-                    <li><a href="tel:07563896325">Ph: 07563 896325</a></li>
+                    <li><a href="tel:07563896325">07563 896325</a></li>
 
                 </ul>
             </div>

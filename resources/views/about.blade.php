@@ -15,6 +15,7 @@
 
     <!-- BOOTSTRAP 5 CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="icon" href="speed.png">
 
     <!-- OWL CAROUSEL  -->
     <link rel="stylesheet"
