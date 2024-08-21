@@ -1703,9 +1703,20 @@ ORDER STEP SECTION END
   height: 25px;
   object-fit: contain;
 }
+.footer .footer-bottom p {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.footer .footer-bottom p span{
+  color: var(--dark-orange);
+}
+.footer .footer-bottom p strong{
+  font-weight: 600;
+}
 .footer .footer-bottom p a{
   color: #fff;
-  text-decoration: underline;
+  /* letter-spacing: 1px; */
 }
 .footer .footer-bottom p a:hover{
   color: var(--primary-blue);
@@ -2821,7 +2832,7 @@ HERO BANNER SECTION START
   margin: 50px 0;
 }
 .contacts .contact-label {
-  background: #293c4f;
+  background: var(--primary-blue);
   font-size: 16px;
   text-transform: uppercase;
   padding: 10px 30px 10px 20px;
@@ -2838,7 +2849,7 @@ HERO BANNER SECTION START
   left: 100%;
   top: 0;
   border-top: 37px solid transparent;
-  border-left: 25px solid #293c4f;
+  border-left: 25px solid var(--primary-blue);
   /* border-bottom: 0 solid transparent; */
 }
 
