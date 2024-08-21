@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in Manchester</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
 
 
     <!-- LIGHT GALLERY CSS -->

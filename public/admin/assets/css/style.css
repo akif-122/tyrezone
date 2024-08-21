@@ -365,3 +365,20 @@ a {
   border-color: var(--dark-blue);
   box-shadow: none;
 }
+select{
+  outline: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+
+.light-green{
+  background-color: #B4E380;
+}
+.light-red{
+  background-color: #ff6a6a;
+}
+.light-yellow{
+  background-color: #F6E96B;
+}

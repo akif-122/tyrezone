@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -161,12 +162,12 @@
                                     <td>4</td>
                                     <td>40000</td>
                                     <td>
-                                        <select class="border-0 outline-0">
-                                            <option value="">Pending</option>
-                                            <option value="">Confirmed</option>
-                                            <option value="">Invalid</option>
-                                            <option value="">Not Available</option>
-                                            <option value="">Delivered</option>
+                                        <select class="border-0 outline-0">  {{-- add class on select tag which option is selected   --}}
+                                            <option class="light-yellow" value="">Pending</option>
+                                            <option class="light-green" value="">Confirmed</option>
+                                            <option class="light-red" value="">Invalid</option>
+                                            <option class="light-red" value="">Not Available</option>
+                                            <option class="light-green" value="">Delivered</option>
                                         </select>
                                     </td>
 
