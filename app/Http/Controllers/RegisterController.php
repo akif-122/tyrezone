@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
+    public function userDash()
+    {
+        // Check if the user is already authenticated
+        if (Auth::check()) {
+            // If the user is logged in, retrieve their details
+            $users = DB::table('users')->where('email', Auth::user()->email)->first();
+            // Redirect to the user dashboard with the user data
+            return view('user_dashboard', ['users' => $users]);
+        }
+    }
+
     public function insert(Request $request)
     {
         try {
@@ -20,22 +31,31 @@ class RegisterController extends Controller
                 'fname' => 'required',
                 'lname' => 'required',
                 'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:3|same:cpassword', // Validate password and its confirmation
                 // Add other validation rules as needed
             ]);
 
-            // If validation passes, create new user
-            $user = new User; // Adjust model name according to your namespace and casing
+            // If validation passes, create a new user
+            $user = new users; // Adjust model name according to your namespace and casing
             $user->f_name = $request->fname;
             $user->last_name = $request->lname;
             $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->city = $request->city;
-            $user->country = $request->country;
-            $user->postcode = $request->postcode;
-            $user->company_name = $request->company;
-            $user->company_phone = $request->company_phone;
             $user->password = Hash::make($request->password);
+
+            // Optional fields, only assign if present
+            if ($request->has('address')) {
+                $user->address = $request->address;
+            }
+            if ($request->has('city')) {
+                $user->city = $request->city;
+            }
+            if ($request->has('postcode')) {
+                $user->postcode = $request->postcode;
+            }
+            if ($request->has('company')) {
+                $user->company_name = $request->company;
+            }
+            // dd($user->save());
             // Save the user record
             $user->save();
 
@@ -46,9 +66,10 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
             // Handle other exceptions
-            return redirect()->back()->withInput()->withErrors(['error' => 'Registration failed.']);
+            return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
     }
+
     public function profile(Request $request)
     {
         // Validate incoming request
@@ -61,11 +82,13 @@ class RegisterController extends Controller
 
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
-            $users = DB::table('users')
-                    ->where('email', $request->input('email'))
-                    ->get();
-            // Authentication successful
-            return view('/user_dashboard',['users'=>$users]); // Redirect to the intended URL after successful login
+            if (Auth::check()) {
+                // If the user is logged in, retrieve their details
+                $users = DB::table('users')->where('email', Auth::user()->email)->first();
+                // Redirect to the user dashboard with the user data
+                return view('user_dashboard', ['users' => $users]);
+            }
+            // Redirect to the intended URL after successful login
         } else {
             // Authentication failed
             return redirect()->back()->withErrors(['error' => 'Invalid credentials'])->withInput();
@@ -77,8 +100,13 @@ class RegisterController extends Controller
         return view('dashboard'); // Return to the view where the form is located
     }
     public function viewAllUsers(Request $request){
+        if(auth()->user()){
         $users = users::get();
         return view('admin.users', compact('users'));
+        }
+        else{
+           return redirect()->route('adminIndex');
+        }
     }
     public function destroy(Request $request)
     {
@@ -164,6 +192,20 @@ class RegisterController extends Controller
             // Handle other exceptions
             return redirect()->back()->withInput()->withErrors(['error' => 'User update failed.']);
         }
-        
+       
 }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        // Invalidate the session
+        $request->session()->invalidate();
+
+        // Regenerate the session token
+        $request->session()->regenerateToken();
+
+        // Redirect to the login page with a success message
+        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+    }
+
 }

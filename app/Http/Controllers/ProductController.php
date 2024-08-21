@@ -80,15 +80,20 @@ class ProductController extends Controller
     // }
     public function edit($id)
     {
+        if(auth()->user()){
         $product = Product::findOrFail($id);
         $manufacturer = Manufacturer::get();
         $pattern = TyrePattern::get();
         return view('admin.edit-product', compact('product', 'manufacturer', 'pattern'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
 
     // UPDATE PRODUCT
     public function update(Request $request)
     {
+        if(auth()->user()){
         $request->validate([
             'name' => 'required',
             'image' => 'required|url',
@@ -125,26 +130,38 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('adminProducts')->with('success', 'Product updated successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function showInfo()
     {
+        if(auth()->user()){
         // Fetch all products from the database
         $products = Product::all();
         // $id = auth()->user()->id;
         // $admin = Admin::find($id);
         // Pass products to the view
         return view('admin.products', compact('products'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function showInfoOnMain()
     {
+        if(auth()->user()){
         // Fetch all products from the database
         $products = Product::all();
 
         // Pass products to the view
         return view('products', compact('products'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function destroy(Request $request)
     {
+        if(auth()->user()){
         // Retrieve name and manufacturer from the request
         $name = $request->input('name');
         $manufacturer_name = $request->input('manufacturer_name');
@@ -162,7 +179,10 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('adminProducts')->with('success', 'Product deleted successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
 
     function render()
     {
@@ -171,7 +191,7 @@ class ProductController extends Controller
         $all->manufacturer_name = 'All';
         $record = Manufacturer::get();
         return view('manufacturers', compact('products', 'record', 'all'));
-    }
+}
     public function category($manufacturer = "")
     {
         $products = Product::where('manufacturer_name', $manufacturer)->get();
@@ -362,6 +382,5 @@ class ProductController extends Controller
 
         return response()->json(['success' => true, 'cart' => $cart]);
     }
-
 
 }

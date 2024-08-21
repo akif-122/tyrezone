@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware;
 
 
@@ -20,6 +21,7 @@ use App\Http\Middleware;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use Faker\Guesser\Name;
 
 
@@ -43,11 +45,16 @@ Route::get('/products', function () {
 Route::get('/products', [ProductController::class, 'showInfoOnMain']);
 Route::post('/updateProduct', [ProductController::class, 'update'])->name('updateProduct');
 Route::get('/edit-product/{id}', [ProductController::class, 'edit'])->name('editProduct');
+// Route::post('/user_Dashboard', [RegisterController::class, 'userDash'])->name('userDashboard');
 
 Route::get('/addManufacture', function () {
     return view('admin/add-manufacture');
 });
 Route::get('/adminIndex', function () {
+    Auth::logout(); // Logs out the user
+    request()->session()->invalidate(); // Invalidates the session
+    request()->session()->regenerateToken(); // Regenerates the CSRF token
+
     return view('admin/index');
 })->name('adminIndex');
 Route::get("/manufacturersHome", [ProductController::class, 'render'])->name("manufacturers");
@@ -71,7 +78,7 @@ Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 Route::get('/adminOrders', function () {
     return view('admin/orders');
 });
-Route::get('/editUser', function () {
+Route::get('/editUser', function (){
     return view('admin/edit-user');
 })->name('editUser');
 Route::get('/adminAddProduct',[ManufacturerController::class,'add_dynamic_options'])->name('adminAddProducts');
@@ -80,9 +87,14 @@ Route::post('/insert', [RegisterController::class, 'insert'])->name('insert');
 Route::get('/render', [ProductController::class, 'render']);
 Route::post('/add', [ProductController::class, 'add'])->name('add');
 Route::post('/update', [ProductController::class, 'update'])->name('update');
-Route::post('/profile', [RegisterController::class, 'profile']);
-// Route::get('/logout', [RegisterController::class, 'logout'])->name('logout');
+Route::post('/profile', [RegisterController::class, 'profile'])->name('profile');
+Route::get('/profile', [RegisterController::class, 'userDash'])->name('userDash');
+Route::get('/logout', [RegisterController::class, 'logout'])->name('logout');
 
+// PAYMENT ROUTES
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::post('/payment/process', [PaymentController::class, 'process'])->name('payment.process');
 
 
 // PAGES VIEWS ROUTES
@@ -141,7 +153,7 @@ Route::get("admin/edit-product",[ManufacturerController::class,'edit_product'])-
 Route::view("admin/add-manufacturer", "admin.add-manufacture")->name("adminAddManufacturers");
 Route::view("admin/edit-manufacturer", "admin.edit-manufacture")->name("adminEditManufacturers");
 Route::get("admin/add-pattren", [ManufacturerController::class,"dynamic_manufactuer_option"])->name("adminAddTyrepattren");
-Route::view("admin/edit-pattren", "admin.edit-patteren")->name("adminEditTyrepattren");
+// Route::get("admin/edit-pattren",[ProductController::class,'editPattern'])->name("adminEditTyrepattren");
 Route::get("admin/users", [RegisterController::class,'viewAllUsers'])->name("adminUsers");
 Route::view("admin/add-users", "admin.add-user")->name("adminAddUsers");
 Route::view("admin/edit-users", "admin.edit-user")->name("adminEditUsers");

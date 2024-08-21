@@ -12,11 +12,17 @@ class ManufacturerController extends Controller
 {
     public function tyre_pattern()
     {
+        if(auth()->user()){
         $record = session('pattern');
         return view('admin.tyre-pattern', compact('record'));
+        }
+        else{
+           return redirect()->route('adminIndex');
+        }
     }
     public function addManufacturer(Request $request)
     {
+        if(auth()->user()){
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -45,15 +51,24 @@ class ManufacturerController extends Controller
         // Fetch all manufacturers to display in the view
         $record = Manufacturer::all();
         return view('admin.manufacturers', compact('record'));
+    } else {
+            return redirect()->route('adminIndex');
+        }
+
     }
     public function index()
     {
+        if(auth()->user()){
 
         $record = Manufacturer::all();
         return view('admin.manufacturers', compact('record'));
+        } else {
+            return redirect()->route('adminIndex');
+        }
     }
     public function destroy(Request $request)
     {
+        if(auth()->user()){
         // Validate the incoming request to ensure 'name' is provided
         $request->validate([
             'name' => 'required|string|max:255',
@@ -75,15 +90,23 @@ class ManufacturerController extends Controller
         $record = Manufacturer::get();
         // Redirect back with a success message
         return view('admin.manufacturers', compact('record'))->with('success', 'Manufacturer deleted successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function edit($id)
     {
+        if(auth()->user()){
         $product = Manufacturer::findOrFail($id);
 
         return view('admin.edit-manufacture', compact('product'));
+        } else {
+            return redirect()->route('adminIndex');
+        }
     }
     public function update(Request $request)
     {
+        if(auth()->user()){
         // Validate the incoming request data
         $request->validate([
             'id' => 'required|exists:manufacturers,id', // Ensure the ID is valid and exists
@@ -112,9 +135,13 @@ class ManufacturerController extends Controller
 
         // Redirect with a success message
         return redirect()->route('adminManufacturers')->with('success', 'Manufacturer updated successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function save_tyre_pattern(Request $request)
     {
+        if(auth()->user()){
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -139,22 +166,35 @@ class ManufacturerController extends Controller
         // Fetch all manufacturers to display in the view
         $record = TyrePattern::get();
         return view('admin.tyre-pattern', compact('record'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function delete_tyre_pattern(Request $request)
     {
+        if(auth()->user()){
         $tyre_pattern = TyrePattern::findOrFail($request->name);
         $tyre_pattern->delete();
         $record = TyrePattern::get();
         return view('admin.tyre-pattern', compact('record'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function edit_pattern($id)
     {
+        if(auth()->user()){
+        $manufacturers = Manufacturer::all();
         $record = TyrePattern::findOrFail($id);
 
-        return view('admin.edit-pattern', compact('record'));
-    }
+        return view('admin.edit-pattern', compact('record', 'manufacturers'));
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function update_pattern(Request $request)
     {
+        if(auth()->user()){
         // Validate the incoming request data
         $request->validate([
             'id' => 'required|exists:tyre_patterns,id', // Ensure the ID exists in the tyre_patterns table
@@ -174,7 +214,10 @@ class ManufacturerController extends Controller
 
         // Redirect or return view with a success message
         return view('admin.dashboard');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function add_dynamic_options()
     {
         $manufacturer = Manufacturer::get();
@@ -187,10 +230,16 @@ class ManufacturerController extends Controller
         return view('admin.add-pattern', compact('manufacturer'));
     }
     public function render_pattern(){
+        if(auth()->user()){
+
         $products = Product::get();
         $tyre_pattern = TyrePattern::get();
         $all = Product::first();
         $all->name = 'All';
         return view('tyre-pattren',compact('tyre_pattern','products','all'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
+
 }

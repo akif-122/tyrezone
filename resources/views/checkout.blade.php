@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in ManchesterETYRE ZONE Tyeres</title>
-    <link rel="icon" href="speed.png">
-    <link rel="icon" href="speed.png">
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />

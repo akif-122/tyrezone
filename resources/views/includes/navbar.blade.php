@@ -23,25 +23,27 @@
 </style>
 <div class="header p-0">
     <!-- TOP BAR SECTION START -->
-    <section class="top-bar">
-        <div class="container-xl d-flex align-items-center justify-content-between">
-            <ul class="m-0 d-flex flex-wrap align-items-center list-unstyled">
-                <li><a href="tel:07563896325"><i class="fa-solid fa-phone"></i> 07563 896325</a></li>
-            </ul>
-            <div class="top-right-account dropdown  position-relative ms-auto me-3">
-                <a href="#" class="text-uppercase d-flex"><i class="fa-solid fa-user"></i> <i
-                        class="fa-solid fa-caret-down ms-2"></i></a>
-                <div class="dropdown-menu dropdown-menu-end">
-                    <a href="{{route("register")}}" class="dropdown-item">Sign Up / Regiser</a>
-                    <a href="{{route("login")}}" class="dropdown-item">Login</a>
-                </div>
+<section class="top-bar">
+    <div class="container-xl d-flex align-items-center justify-content-between">
+        <ul class="m-0 d-flex flex-wrap align-items-center list-unstyled">
+            <li><a href="tel:07563896325"><i class="fa-solid fa-phone"></i> 07563 896325</a></li>
+        </ul>
+        <div class="top-right-account dropdown position-relative ms-auto me-3">
+            <a href="#" class="text-uppercase d-flex"><i class="fa-solid fa-user"></i> <i class="fa-solid fa-caret-down ms-2"></i></a>
+            <div class="dropdown-menu dropdown-menu-end">
+                @auth
+                    <a href="{{route('userDash')}}" class="dropdown-item">Profile</a>
+                    <a href="{{url('logout')}}" class="dropdown-item">Logout</a>
+                @else
+                    <a href="{{ route('register') }}" class="dropdown-item">Sign Up / Register</a>
+                    <a href="{{ route('login') }}" class="dropdown-item">Login</a>
+                @endauth
             </div>
         </div>
+    </div>
+</section>
+<!-- TOP BAR SECTION END -->
 
-
-
-    </section>
-    <!-- TOP BAR SECTION END -->
 
     <!-- SIDE CART -->
 <div class="side-cart" id="side-cart">
@@ -141,7 +143,7 @@
                     </li>
 
                     <li><a href="{{route("gallery")}}" class="{{ Route::is("gallery") ? "active": "" }} ">Gallery</a></li>
-                    
+                    <li><a href="{{route("blogs")}}" class="{{ Route::is("blogs") ? "active": "" }} ">Blog</a></li>
                     <li><a href="{{route("about")}}" class="{{ Route::is("about") ? "active": "" }} ">About</a></li>
                     <li><a href="{{route("contact")}}" class="{{ Route::is("contact") ? "active": "" }} ">Contact</a></li>
 

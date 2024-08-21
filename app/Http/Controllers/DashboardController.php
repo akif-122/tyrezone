@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function index(){
+        if(auth()->user()){
         return view('dashboard');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function dash(){
+        if(auth()->user()){
         $manufacturers = session('manufacturers');
         $pattern = session('pattern');
         $product = session('product');
@@ -24,5 +29,8 @@ class DashboardController extends Controller
         }
 
         return view('admin.dashboard', compact('manufacturers', 'pattern', 'product','patternCount','productCount', 'manufacturersCount','usersCount'));
-}
+} else {
+            return redirect()->route('adminIndex');
+        }
+    }
 }

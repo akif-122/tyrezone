@@ -78,10 +78,10 @@
                                         <div class="form-group">
                                             <label for="">Manufacturers:</label>
                                             <select name="manu_id" class="form-select">
-                                                <option value="{{ $record->type_of_pattern }}" disabled selected>Select Pattern</option>
-                                                <option value="Dunlop" {{ $record->type_of_pattern == 'Dunlop' ? 'selected' : '' }}>Dunlop</option>
-                                                <option value="Anchee" {{ $record->type_of_pattern == 'Anchee' ? 'selected' : '' }}>Anchee</option>
-                                                <option value="Antares" {{ $record->type_of_pattern == 'Antares' ? 'selected' : '' }}>Antares</option>
+                                                <option value="" disabled selected>Select</option>
+                                                @foreach ($manufacturers as $item)
+                                                     <option value="{{$item->name}}">{{$item->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

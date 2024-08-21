@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in Manchester</title>
 
-    <link rel="icon" href="speed.png">
 
     <!-- LIGHT GALLERY CSS -->
     <link rel="stylesheet" href="assets/css/lightbox.min.css" />
