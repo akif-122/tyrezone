@@ -62,13 +62,13 @@
 
                             <tbody>
                                 @if (@isset($record))
-                                    <?php $id = 0; ?>
+                                
 
                                     @foreach ($record as $record)
-                                        @php $id++ @endphp
+                                
 
                                         <tr>
-                                            <td>{{ $id }}</td>
+                                            <td>{{ $record->id }}</td>
 
                                             <td>{{ $record->name }}</td>
                                             <td>{{ $record->image }}</td>

@@ -252,11 +252,6 @@ class ProductController extends Controller
 
     public function checkout()
     {
-        // Check if the user is logged in
-        if (!auth()->check()) {
-            // Redirect to the login page if not authenticated
-            return redirect()->route('login')->with('warning', 'You need to log in first to proceed to checkout.');
-        }
 
         // Check if the cart is empty
         if (!session()->has('cart') || count(session('cart')) === 0) {

@@ -260,7 +260,7 @@
                                                     <p>Price from
                                                         <strong>£{{ number_format($product->price, 2) }}</strong></p>
                                                     <div class="tyre-card-btn">
-                                                        <a href='{{ route('index-pattern') }}'
+                                                        <a href='{{ route('index-pattern')}}'
                                                             class="btn btn-primary">Find Out More <i
                                                                 class="fa-solid fa-angle-right"></i></a>
                                                     </div>

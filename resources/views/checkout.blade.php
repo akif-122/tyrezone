@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in ManchesterETYRE ZONE Tyeres</title>
@@ -14,14 +14,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
 
     <!-- OWL CAROUSEL  -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
 
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-
 </head>
 
 <body>
@@ -37,12 +34,11 @@
         <!-- CHECKOUT DETAILS START -->
         <div class="checkout">
             <div class="container">
-                <form action="">
+                <form>
 
                     <div class="row">
                         <div class="col-lg-7">
                             <h3>Enter your details</h3>
-
 
                             <div class="checkout-form form-wrap">
 
@@ -50,60 +46,58 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">First Name <span>*</span></label>
-                                            <input type="text" class="form-control" placeholder="First Name">
+                                            <label for="first_name">First Name <span>*</span></label>
+                                            <input type="text" id="first_name" class="form-control" placeholder="First Name">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Last Name <span>*</span></label>
-                                            <input type="text" class="form-control" placeholder="Last Name">
+                                            <label for="last_name">Last Name <span>*</span></label>
+                                            <input type="text" id="last_name" class="form-control" placeholder="Last Name">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Email Name <span>*</span></label>
-                                            <input type="email" class="form-control" placeholder="Email">
+                                            <label for="email">Email <span>*</span></label>
+                                            <input type="email" id="email" class="form-control" placeholder="Email">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Telephone <span>*</span></label>
+                                            <label for="telephone">Telephone <span>*</span></label>
                                             <div class="input-group">
-                                                <div class="input-group-text">
-                                                    +44
-                                                </div>
-                                                <input type="number" class="form-control" placeholder="Telephone">
+                                                <div class="input-group-text">+44</div>
+                                                <input type="number" id="telephone" class="form-control" placeholder="Telephone">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Reg. No. <span>*</span></label>
+                                            <label for="reg_no">Reg. No. <span>*</span></label>
                                             <div class="input-group">
-                                                <input type="Text" class="form-control" placeholder="REG No.">
-                                                <button class="input-group-text igt-btn">
-                                                    Lookup
-                                                </button>
+                                                <input type="text" id="reg_no" class="form-control" placeholder="REG No.">
+                                                <button class="input-group-text igt-btn">Lookup</button>
                                             </div>
                                         </div>
                                     </div>
+
+                                    @auth
                                     <div class="col-sm-6 mb-3 align-self-end">
                                         <div class="form-group">
-                                            <button class="main-btn w-100">
+                                            <button type="button" onclick="fetchData()" class="main-btn w-100">
                                                 Magic
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                     fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
+                                                    <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z" />
                                                 </svg>
                                             </button>
                                         </div>
                                     </div>
+                                    @endauth
 
                                 </div>
 
@@ -112,140 +106,42 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Post Code <span>*</span></label>
+                                            <label for="postcode">Post Code <span>*</span></label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Post Code">
-                                                <button class="input-group-text igt-btn">
-                                                    Lookup
-                                                </button>
+                                                <input type="text" id="postcode" class="form-control" placeholder="Post Code">
+                                                <button class="input-group-text igt-btn">Lookup</button>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Company <span>*</span></label>
-                                            <input type="text" class="form-control" placeholder="Company">
+                                            <label for="company">Company <span>*</span></label>
+                                            <input type="text" id="company" class="form-control" placeholder="Company">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-12 mb-3">
                                         <div class="form-group">
-                                            <label for="">Address <span>*</span></label>
-                                            <input type="text" class="form-control" placeholder="Company">
+                                            <label for="address">Address <span>*</span></label>
+                                            <input type="text" id="address" class="form-control" placeholder="Address">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">City <span>*</span></label>
-                                            <input type="text" class="form-control" placeholder="City">
+                                            <label for="city">City <span>*</span></label>
+                                            <input type="text" id="city" class="form-control" placeholder="City">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Country <span>*</span></label>
-                                            <select class="form-select">
+                                            <label for="state">Country <span>*</span></label>
+                                            <select id="state" class="form-select">
+                                                <!-- Options as before -->
                                                 <option value="Aberdeen">Aberdeen</option>
-                                                <option value="Aberdeenshire">Aberdeenshire</option>
-                                                <option value="Anglesey">Anglesey</option>
-                                                <option value="Angus">Angus</option>
-                                                <option value="Argyll and Bute">Argyll and Bute</option>
-                                                <option value="Bedfordshire">Bedfordshire</option>
-                                                <option value="Berkshire">Berkshire</option>
-                                                <option value="Blaenau Gwent">Blaenau Gwent</option>
-                                                <option value="Bridgend">Bridgend</option>
-                                                <option value="Bristol">Bristol</option>
-                                                <option value="Buckinghamshire">Buckinghamshire</option>
-                                                <option value="Caerphilly">Caerphilly</option>
-                                                <option value="Cambridgeshire">Cambridgeshire</option>
-                                                <option value="Cardiff">Cardiff</option>
-                                                <option value="Carmarthenshire">Carmarthenshire</option>
-                                                <option value="Ceredigion">Ceredigion</option>
-                                                <option value="Cheshire">Cheshire</option>
-                                                <option value="Clackmannanshire">Clackmannanshire</option>
-                                                <option value="Conwy">Conwy</option>
-                                                <option value="Cornwall">Cornwall</option>
-                                                <option value="Denbighshire">Denbighshire</option>
-                                                <option value="Derbyshire">Derbyshire</option>
-                                                <option value="Devon">Devon</option>
-                                                <option value="Dorset">Dorset</option>
-                                                <option value="Dumfries and Galloway">Dumfries and Galloway</option>
-                                                <option value="Dundee">Dundee</option>
-                                                <option value="Durham">Durham</option>
-                                                <option value="East Ayrshire">East Ayrshire</option>
-                                                <option value="East Dunbartonshire">East Dunbartonshire</option>
-                                                <option value="East Lothian">East Lothian</option>
-                                                <option value="East Renfrewshire">East Renfrewshire</option>
-                                                <option value="East Riding of Yorkshire">East Riding of Yorkshire
-                                                </option>
-                                                <option value="East Sussex">East Sussex</option>
-                                                <option value="Edinburgh">Edinburgh</option>
-                                                <option value="Essex">Essex</option>
-                                                <option value="Falkirk">Falkirk</option>
-                                                <option value="Fife">Fife</option>
-                                                <option value="Flintshire">Flintshire</option>
-                                                <option value="Glasgow">Glasgow</option>
-                                                <option value="Gloucestershire">Gloucestershire</option>
-                                                <option value="Greater London">Greater London</option>
-                                                <option value="Greater Manchester">Greater Manchester</option>
-                                                <option value="Gwynedd">Gwynedd</option>
-                                                <option value="Hampshire">Hampshire</option>
-                                                <option value="Herefordshire">Herefordshire</option>
-                                                <option value="Hertfordshire">Hertfordshire</option>
-                                                <option value="Highlands">Highlands</option>
-                                                <option value="Inverclyde">Inverclyde</option>
-                                                <option value="Isle of Wight">Isle of Wight</option>
-                                                <option value="Kent">Kent</option>
-                                                <option value="Lancashire">Lancashire</option>
-                                                <option value="Leicestershire">Leicestershire</option>
-                                                <option value="Lincolnshire">Lincolnshire</option>
-                                                <option value="Merseyside">Merseyside</option>
-                                                <option value="Merthyr Tydfil">Merthyr Tydfil</option>
-                                                <option value="Midlothian">Midlothian</option>
-                                                <option value="Monmouthshire">Monmouthshire</option>
-                                                <option value="Moray">Moray</option>
-                                                <option value="Neath Port Talbot">Neath Port Talbot</option>
-                                                <option value="Newport">Newport</option>
-                                                <option value="Norfolk">Norfolk</option>
-                                                <option value="North Ayrshire">North Ayrshire</option>
-                                                <option value="North Lanarkshire">North Lanarkshire</option>
-                                                <option value="North Yorkshire">North Yorkshire</option>
-                                                <option value="Northamptonshire">Northamptonshire</option>
-                                                <option value="Northumberland">Northumberland</option>
-                                                <option value="Nottinghamshire">Nottinghamshire</option>
-                                                <option value="Orkney Islands">Orkney Islands</option>
-                                                <option value="Oxfordshire">Oxfordshire</option>
-                                                <option value="Pembrokeshire">Pembrokeshire</option>
-                                                <option value="Perth and Kinross">Perth and Kinross</option>
-                                                <option value="Powys">Powys</option>
-                                                <option value="Renfrewshire">Renfrewshire</option>
-                                                <option value="Rhondda Cynon Taff">Rhondda Cynon Taff</option>
-                                                <option value="Rutland">Rutland</option>
-                                                <option value="Scottish Borders">Scottish Borders</option>
-                                                <option value="Shetland Islands">Shetland Islands</option>
-                                                <option value="Shropshire">Shropshire</option>
-                                                <option value="Somerset">Somerset</option>
-                                                <option value="South Ayrshire">South Ayrshire</option>
-                                                <option value="South Lanarkshire">South Lanarkshire</option>
-                                                <option value="South Yorkshire">South Yorkshire</option>
-                                                <option value="Staffordshire">Staffordshire</option>
-                                                <option value="Stirling">Stirling</option>
-                                                <option value="Suffolk">Suffolk</option>
-                                                <option value="Surrey">Surrey</option>
-                                                <option value="Swansea">Swansea</option>
-                                                <option value="Torfaen">Torfaen</option>
-                                                <option value="Tyne and Wear">Tyne and Wear</option>
-                                                <option value="Vale of Glamorgan">Vale of Glamorgan</option>
-                                                <option value="Warwickshire">Warwickshire</option>
-                                                <option value="West Dunbartonshire">West Dunbartonshire</option>
-                                                <option value="West Lothian">West Lothian</option>
-                                                <option value="West Midlands">West Midlands</option>
-                                                <option value="West Sussex">West Sussex</option>
-                                                <option value="West Yorkshire">West Yorkshire</option>
-                                                <option value="Western Isles">Western Isles</option>
-                                                <option value="Wiltshire">Wiltshire</option>
+                                                <!-- More options -->
                                                 <option value="Worcestershire">Worcestershire</option>
                                                 <option value="Wrexham">Wrexham</option>
                                             </select>
@@ -254,180 +150,57 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <div class="form-group">
-                                            <label for="">Country <span>*</span></label>
-                                            <select class="form-select">
-                                                <!-- <option value=""></option> -->
-                                                <option value="235" selected="">United Kingdom</option>
+                                            <label for="country">Country <span>*</span></label>
+                                            <select id="country" class="form-select">
+                                                <option value="235">United Kingdom</option>
+                                                <option value="237">United States</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-12 mb-3">
-                                        <div class="form-group ">
-                                            <label for="">Comment/Notes</label>
-                                            <textarea name="" class="form-control" rows="4" id=""></textarea>
+                                    <div class="col-sm-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="additional_info">Additional Information</label>
+                                            <textarea id="additional_info" class="form-control" rows="3" placeholder="Additional Information"></textarea>
                                         </div>
                                     </div>
 
-
                                 </div>
-
 
                             </div>
 
                         </div>
 
-                        <!-- CART SECTION START -->
                         <div class="col-lg-5">
-                            <h3>Your Order</h3>
+                            <h3>Order Summary</h3>
+                            <div class="checkout-summary">
 
-                            <!-- CART START -->
-                            <div class="cart">
-                                <div class="cart-items">
-                                    <div class="table-responsive">
-                                        <table class="table ">
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>
-                                                        <div class="item-title">
-                                                            <p>Balancing And Repairs</p>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="qty-wrap d-flex align-items-center">
-                                                            <button><i class="fa-solid fa-minus"></i></button>
-                                                            <input type="text" min="1" value="1">
-                                                            <button><i class="fa-solid fa-plus"></i></button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="price mb-0">£10.00</p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-end">
-                                                            <button class="remove-item">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td>
-                                                        <div class="item-title">
-                                                            <p>Summer Tyre Dunlop GRANDTREK AT20 265/65R17 112 S
-                                                                (Garage Fitted)</p>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="qty-wrap d-flex align-items-center">
-                                                            <button><i class="fa-solid fa-minus"></i></button>
-                                                            <input type="text" min="1" value="1">
-                                                            <button><i class="fa-solid fa-plus"></i></button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <p class="price mb-0">£10.00</p>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-end">
-                                                            <button class="remove-item">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td class="px-0"><strong>Sub-Total</strong></td>
-                                                    <td>
-                                                        <p class="m-0 text-end">£132.65</p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"></td>
-                                                    <td class="px-0"><strong>Total</strong></td>
-                                                    <td>
-                                                        <p class="m-0 text-end">£132.65</p>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
+                                <div class="summary-item">
+                                    <span>Total Amount:</span>
+                                    <span class="amount">£200.00</span>
                                 </div>
-                            </div>
-                            <!-- CART END -->
 
-                            <!-- APPOINTMENT DETAIL START-->
-                            <div class="appointment-detail mt-4">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="2">Appointment Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Centre Locator</td>
-                                                <td>
-                                                    <strong>TYRE ZONE TYRES LTD
-                                                        Unit 4 Church Street, Middleton Manchester M24 2PY, UK</strong>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Date time</td>
-                                                <td>
-                                                    <strong>07th, Jul 2024 morning</strong>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
+                                <div class="summary-item">
+                                    <span>Discount:</span>
+                                    <span class="discount">-£20.00</span>
                                 </div>
-                            </div>
-                            <!-- APPOINTMENT DETAIL END-->
 
-                            <div class="form-check my-3">
-                                <input type="radio" class="form-check-input" id="atFitting">
-                                <label for="atFitting">Pay at Fitting Time</label>
-                            </div>
+                                <div class="summary-item">
+                                    <span>Subtotal:</span>
+                                    <span class="subtotal">£180.00</span>
+                                </div>
 
-                            <div class="form-check my-3">
-                                <input type="checkbox" class="form-check-input" id="terms">
-                                <label for="terms">I have read and agree to the <a href="#">Terms &
-                                        Conditions of
-                                        Use</a></label>
-                            </div>
-                            <div class="text-center text-sm-end">
-                                <button class="main-btn">PROCEED TO BOOKING</button>
                             </div>
 
+                            {{-- <button type="submit" class="main-btn w-100 mt-4">Place Order</button> --}}
                         </div>
-                        <!-- CART SECTION END -->
+
                     </div>
 
                 </form>
-
             </div>
         </div>
         <!-- CHECKOUT DETAILS END -->
-
-
-
-
-        @includeIf('includes.footer')
-
-
-
-    </div>
-
-
     <!-- JQUERY  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- OWL CAROUSEL -->
@@ -439,6 +212,45 @@
 
     <!-- CUSTOM JS -->
     <script src="assets/js/app.js"></script>
+    <script>
+    // alert(magicButton+"---->");
+    function fetchData(){
+        
+            // Perform AJAX request to fetch user data
+            fetch('{{ route('fetch.user.data') }}', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+})
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    
+                    // Populate form fields with user data
+                    const userData = data.data;
+                    document.getElementById('first_name').value = userData.first_name || '';
+                    document.getElementById('last_name').value = userData.last_name || '';
+                    document.getElementById('email').value = userData.email || '';
+                    document.getElementById('telephone').value = ''; // Optional
+                    document.getElementById('reg_no').value = ''; // Optional
+                    document.getElementById('postcode').value = userData.postcode || '';
+                    document.getElementById('company').value = userData.company || '';
+                    document.getElementById('city').value = userData.city || '';
+                    document.getElementById('additional_info').value = ''; // Optional
+                } else {
+                    // Handle failure (optional)
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+        }
+
+</script>
+
 
 </body>
 

@@ -230,16 +230,12 @@ class ManufacturerController extends Controller
         return view('admin.add-pattern', compact('manufacturer'));
     }
     public function render_pattern(){
-        if(auth()->user()){
 
         $products = Product::get();
         $tyre_pattern = TyrePattern::get();
         $all = Product::first();
         $all->name = 'All';
         return view('tyre-pattren',compact('tyre_pattern','products','all'));
-    } else {
-            return redirect()->route('adminIndex');
-        }
 }
 
 }

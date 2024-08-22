@@ -83,6 +83,7 @@ class RegisterController extends Controller
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
             if (Auth::check()) {
+                
                 // If the user is logged in, retrieve their details
                 $users = DB::table('users')->where('email', Auth::user()->email)->first();
                 // Redirect to the user dashboard with the user data

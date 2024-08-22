@@ -67,12 +67,12 @@
 
                             <tbody>
                                 @if (isset($users) && $users->isNotEmpty())
-                                <?php $id = 0; ?>
+                                
                                     @foreach ($users as $user)
-                                    @php $id++ @endphp
+                                    
 
                                         <tr>
-                                            <td>{{ $id }}</td>
+                                            <td>{{ $user->id }}</td>
                                             <td>{{ $user->f_name }} {{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->company_name }}</td>

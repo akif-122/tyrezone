@@ -63,13 +63,13 @@
                             <tbody>
 
                                 @if (@isset($record) && $record->isNotEmpty())
-                                    <?php $id = 0; ?>
+                                
 
                                     @foreach ($record as $record)
-                                        @php $id++ @endphp
+                                        
 
                                         <tr>
-                                            <td>{{ $id }}</td>
+                                            <td>{{$record->id}}</td>
 
                                             <td>{{ $record->name_of_manufacturer }}</td>
                                             <td>{{ $record->type_of_pattern }}</td>
