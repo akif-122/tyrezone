@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in ManchesterETYRE ZONE Tyeres</title>
     <link rel="icon" href="{{ asset('speed.png') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />

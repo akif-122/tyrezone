@@ -16,7 +16,7 @@ class UserController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => [
-                    'first_name' => $user->first_name,
+                    'first_name' => $user->f_name,
                     'last_name' => $user->last_name,
                     'email' => $user->email,
                     'address' => $user->address,
