@@ -83,7 +83,7 @@ class RegisterController extends Controller
         // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
             if (Auth::check()) {
-                
+
                 // If the user is logged in, retrieve their details
                 $users = DB::table('users')->where('email', Auth::user()->email)->first();
                 // Redirect to the user dashboard with the user data
@@ -206,7 +206,7 @@ class RegisterController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect to the login page with a success message
-        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+        return redirect()->route('home')->with('success', 'You have been logged out successfully.');
     }
 
 }

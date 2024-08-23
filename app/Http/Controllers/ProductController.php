@@ -13,22 +13,15 @@ use function PHPUnit\Framework\isEmpty;
 
 class ProductController extends Controller
 {
-    // protected $admin;
-    // public function __construct()
-    // {
-    //     $this->middleware(function ($request, $next) {
-    //         $this->admin = Admin::find(auth()->user()->id);
-    //         return $next($request);
-    //     });
-    // }
+
     public function add(Request $request)
     {
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validate the image
             'manu_name' => 'required|string|max:255',
-            'pattern_type' => 'required|string|max:255', // Update to match the form field name
+            'pattern_type' => 'required|string|max:255',
             'fuel' => 'required|string|max:255',
             'wet_grip' => 'required|string|max:255',
             'road_noise' => 'required|string|max:255',
@@ -39,45 +32,34 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
         ]);
 
-        // Check if the product already exists
-        // $exists = Product::where('name', $request->name)
-        //     ->where('manufacturer_name', $request->manu_name)
-        //     ->exists();
-
-        // if ($exists) {
-        //     return redirect()->back()->withErrors('Product already exists.');
-        // }
+        // Handle file upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 'public'); // Store file and get path
+        }
 
         // Create and save the new product
         Product::create([
             'name' => $request->name,
-            'image' => $request->image,
+            'image' => $imagePath, // Store the file path
             'manufacturer_name' => $request->manu_name,
-            'tyre_pattern' => $request->pattern_type, // Update to match the form field name
+            'tyre_pattern' => $request->pattern_type,
             'fuel_efficiency' => $request->fuel,
             'wet_grip' => $request->wet_grip,
             'road_noise' => $request->road_noise,
             'size' => $request->size,
             'tyre_type' => $request->type,
             'season' => $request->season,
-            'budget_tyres' => $request->has('budget') ? true : false, // Handle checkbox properly
+            'budget_tyres' => $request->has('budget') ? true : false,
             'price' => $request->price,
         ]);
 
         return redirect()->route('adminProducts');
     }
 
-    // public function showProducts(){
 
-    //     // Redirect with a success message
-    //     $products = Product::all();
 
-    //     // Pass products to the view
-    //     return view('products', compact('products'));
-    // }
-    // public function addPage(){
-    //     return view('addProducts');
-    // }
     public function edit($id)
     {
         if(auth()->user()){

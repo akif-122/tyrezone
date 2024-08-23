@@ -97,7 +97,7 @@ Route::post('/payment/process', [PaymentController::class, 'process'])->name('pa
 // PAGES VIEWS ROUTES
 Route::view("/", "index")->name("home");
 Route::view("/login", "login")->name("login");
-Route::view("/register", "register")->name("register");
+Route::view("/op", "register")->name("register");
 Route::view("/about", "about")->name("about");
 Route::view("/blog-detail", "blog-detail")->name("blog-detail");
 Route::view("/blogs", "blogs")->name("blogs");
@@ -113,7 +113,6 @@ Route::view("/search", "search")->name("search");
 Route::view("/services", "services")->name("services");
 // Route::view("/tyre-pattern", [ManufacturerController::class,'tyre-pattern'])->name("tyre-pattern");
 Route::get("/index-pattern", [ManufacturerController::class, 'render_pattern'])->name("index-pattern");
-Route::get("/shop", [ManufacturerController::class, 'render_pattern'])->name("shop");
 Route::get("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
 Route::delete('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
 // Route::post("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
@@ -137,9 +136,6 @@ Route::post('/remove-from-cart', [ProductController::class, 'removeFromSideCart'
 
 
 // ADMIN ROUTES
-
-// Route::view("admin/dashboard", "admin.dashboard")->name("adminDashboard");
-// Route::view("admin/products", "admin.products")->name("adminProducts");
 Route::view("admin/add-product", "admin.add-product")->name("adminAddProduct");
 
 

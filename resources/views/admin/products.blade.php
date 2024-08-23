@@ -66,7 +66,9 @@
                                 <tr>
                                     <td>{{ $product->id }}</td>
                                     <td>{{ $product->name }}</td>
-                                    <td><img src="{{ $product->image }}" alt="{{ $product->name }}"></td>
+                                    <td>
+                                        <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    </td>
                                     <td>{{ $product->manufacturer_name }}</td>
                                     <td>{{ $product->tyre_pattern }}</td>
                                     <td>{{ $product->fuel_efficiency }}</td>
