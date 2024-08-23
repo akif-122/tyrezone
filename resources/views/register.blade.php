@@ -37,19 +37,19 @@
                         <div class="form-group mb-3">
                             <label for="">First Name <span>*</span></label>
                             <input type="text" required name="fname" placeholder="First Name" value=""
-                                name="fname" class="form-control">
+                                 class="form-control">
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="">Last Name <span>*</span></label>
                             <input type="text" required name="lname" placeholder="Last Name" value=""
-                                name="lname" class="form-control">
+                                 class="form-control">
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="">Email Address <span>*</span></label>
                             <input required type="email" name="email" placeholder="Email Address" value=""
-                                name="email" class="form-control">
+                                 class="form-control">
                         </div>
 
                         {{-- <div class="form-group mb-3">
@@ -62,11 +62,11 @@
                         <div class="form-group mb-3">
                             <label for="">Password <span>*</span> </label>
                             <input required type="password" name="password" placeholder="Password" value=""
-                                name="password" class="form-control">
+                                 class="form-control">
                         </div>
                         <div class="form-group mb-3">
                             <label for="">Confirm Password <span>*</span> </label>
-                            <input required type="password" name="c_password" placeholder="Confirm Password"
+                            <input required type="password" placeholder="Confirm Password"
                                 value="" name="cpassword" class="form-control">
                         </div>
 
@@ -78,7 +78,7 @@
                         <div class="form-group mb-3">
                             <label for="">Company</label>
                             <input type="text" name="company" placeholder="Company" value=""
-                                name="company_name" class="form-control">
+                                 class="form-control">
                         </div>
 
                         {{-- <div class="form-group mb-3">
@@ -90,20 +90,20 @@
 
                         <div class="form-group mb-3">
                             <label for="">City</label>
-                            <input type="text" name="city" placeholder="City" value="" name="city"
+                            <input type="text" name="city" placeholder="City" value=""
                                 class="form-control">
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="">Address </label>
-                            <input name="address" type="text" placeholder="Address" value="" name="address"
+                            <input name="address" type="text" placeholder="Address" value=""
                                 class="form-control">
                         </div>
 
 
                         <div class="form-group mb-3">
                             <label for="">Postcode</label>
-                            <input name="post_code" type="text" placeholder="Postcode" value="" name="postcode"
+                            <input type="text" placeholder="Postcode" value="" name="postcode"
                                 class="form-control">
                         </div>
                         {{-- <div class="form-group mb-3">

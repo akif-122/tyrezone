@@ -13,22 +13,15 @@ use function PHPUnit\Framework\isEmpty;
 
 class ProductController extends Controller
 {
-    // protected $admin;
-    // public function __construct()
-    // {
-    //     $this->middleware(function ($request, $next) {
-    //         $this->admin = Admin::find(auth()->user()->id);
-    //         return $next($request);
-    //     });
-    // }
+
     public function add(Request $request)
     {
         // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validate the image
             'manu_name' => 'required|string|max:255',
-            'pattern_type' => 'required|string|max:255', // Update to match the form field name
+            'pattern_type' => 'required|string|max:255',
             'fuel' => 'required|string|max:255',
             'wet_grip' => 'required|string|max:255',
             'road_noise' => 'required|string|max:255',
@@ -39,56 +32,50 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
         ]);
 
-        // Check if the product already exists
-        // $exists = Product::where('name', $request->name)
-        //     ->where('manufacturer_name', $request->manu_name)
-        //     ->exists();
-
-        // if ($exists) {
-        //     return redirect()->back()->withErrors('Product already exists.');
-        // }
+        // Handle file upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 'public'); // Store file and get path
+        }
 
         // Create and save the new product
         Product::create([
             'name' => $request->name,
-            'image' => $request->image,
+            'image' => $imagePath, // Store the file path
             'manufacturer_name' => $request->manu_name,
-            'tyre_pattern' => $request->pattern_type, // Update to match the form field name
+            'tyre_pattern' => $request->pattern_type,
             'fuel_efficiency' => $request->fuel,
             'wet_grip' => $request->wet_grip,
             'road_noise' => $request->road_noise,
             'size' => $request->size,
             'tyre_type' => $request->type,
             'season' => $request->season,
-            'budget_tyres' => $request->has('budget') ? true : false, // Handle checkbox properly
+            'budget_tyres' => $request->has('budget') ? true : false,
             'price' => $request->price,
         ]);
 
         return redirect()->route('adminProducts');
     }
 
-    // public function showProducts(){
 
-    //     // Redirect with a success message
-    //     $products = Product::all();
 
-    //     // Pass products to the view
-    //     return view('products', compact('products'));
-    // }
-    // public function addPage(){
-    //     return view('addProducts');
-    // }
     public function edit($id)
     {
+        if(auth()->user()){
         $product = Product::findOrFail($id);
         $manufacturer = Manufacturer::get();
         $pattern = TyrePattern::get();
         return view('admin.edit-product', compact('product', 'manufacturer', 'pattern'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
 
     // UPDATE PRODUCT
     public function update(Request $request)
     {
+        if(auth()->user()){
         $request->validate([
             'name' => 'required',
             'image' => 'required|url',
@@ -125,26 +112,38 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('adminProducts')->with('success', 'Product updated successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function showInfo()
     {
+        if(auth()->user()){
         // Fetch all products from the database
         $products = Product::all();
         // $id = auth()->user()->id;
         // $admin = Admin::find($id);
         // Pass products to the view
         return view('admin.products', compact('products'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function showInfoOnMain()
     {
+        if(auth()->user()){
         // Fetch all products from the database
         $products = Product::all();
 
         // Pass products to the view
         return view('products', compact('products'));
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
     public function destroy(Request $request)
     {
+        if(auth()->user()){
         // Retrieve name and manufacturer from the request
         $name = $request->input('name');
         $manufacturer_name = $request->input('manufacturer_name');
@@ -162,7 +161,10 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('adminProducts')->with('success', 'Product deleted successfully');
-    }
+    } else {
+            return redirect()->route('adminIndex');
+        }
+}
 
     function render()
     {
@@ -171,7 +173,7 @@ class ProductController extends Controller
         $all->manufacturer_name = 'All';
         $record = Manufacturer::get();
         return view('manufacturers', compact('products', 'record', 'all'));
-    }
+}
     public function category($manufacturer = "")
     {
         $products = Product::where('manufacturer_name', $manufacturer)->get();
@@ -232,11 +234,6 @@ class ProductController extends Controller
 
     public function checkout()
     {
-        // Check if the user is logged in
-        if (!auth()->check()) {
-            // Redirect to the login page if not authenticated
-            return redirect()->route('login')->with('warning', 'You need to log in first to proceed to checkout.');
-        }
 
         // Check if the cart is empty
         if (!session()->has('cart') || count(session('cart')) === 0) {
@@ -362,6 +359,5 @@ class ProductController extends Controller
 
         return response()->json(['success' => true, 'cart' => $cart]);
     }
-
 
 }

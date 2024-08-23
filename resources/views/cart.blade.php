@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyre Zone | New & Part Worn Tyres | Tyres in Manchester</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -141,52 +142,58 @@
     <script src="{{ asset("assets/js/app.js") }}"></script>
 
     <script>
-        $(document).ready(function() {
-            // Update cart quantity
-            function updateCart(id, quantity) {
-                $.ajax({
-                    url: "{{ route('cart.update') }}",
-                    type: "POST",
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: id,
-                        quantity: quantity
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Update item total and overall totals
-                            $('#item-total-' + id).text('£' + response.itemTotal);
-                            $('#subtotal').text('£' + response.subtotal);
-                            $('#total').text('£' + response.total);
-                        }
-                    },
-                    error: function(response) {
-                        console.log('Error:', response);
-                    }
-                });
+       $(document).ready(function() {
+    // Update cart quantity
+    function updateCart(id, quantity) {
+        $.ajax({
+            url: "{{ route('cart.update') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id,
+                quantity: quantity
+            },
+            success: function(response) {
+                if (response.success) {
+                    // Update item total and overall totals on the cart page
+                    $('#item-total-' + id).text('£' + response.itemTotal);
+                    $('#subtotal').text('£' + response.subtotal);
+                    $('#total').text('£' + response.total);
+                    
+                    // Update the side cart
+                    updateSideCart(response.cart);
+                }
+            },
+            error: function(response) {
+                console.log('Error:', response);
             }
-
-            // Increase quantity
-            $('.increase-quantity').on('click', function() {
-                let input = $(this).siblings('input');
-                let quantity = parseInt(input.val()) + 1;
-                input.val(quantity);
-
-                let id = $(this).data('id');
-                updateCart(id, quantity);
-            });
-
-            // Decrease quantity
-            $('.decrease-quantity').on('click', function() {
-                let input = $(this).siblings('input');
-                let quantity = parseInt(input.val()) - 1;
-                if (quantity < 1) quantity = 1; // Prevent going below 1
-                input.val(quantity);
-
-                let id = $(this).data('id');
-                updateCart(id, quantity);
-            });
         });
+    }
+
+    // Increase quantity
+    $('.increase-quantity').on('click', function() {
+        let input = $(this).siblings('input');
+        let quantity = parseInt(input.val()) + 1;
+        input.val(quantity);
+
+        let id = $(this).data('id');
+        updateCart(id, quantity);
+    });
+
+    // Decrease quantity
+    $('.decrease-quantity').on('click', function() {
+        let input = $(this).siblings('input');
+        let quantity = parseInt(input.val()) - 1;
+        if (quantity < 1) quantity = 1; // Prevent going below 1
+        input.val(quantity);
+
+        let id = $(this).data('id');
+        updateCart(id, quantity);
+    });
+});
+
+
+
     </script>
 
 </body>

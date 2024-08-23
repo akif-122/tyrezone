@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
+
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
@@ -57,6 +59,8 @@
                                     <label for="password">Password <span>*</span></label>
                                     <input type="password" id="password" name="password" placeholder="Password" class="form-control">
                                 </div>
+
+                               
                 
                                 <div class="d-flex flex-wrap flex-row-reverse align-items-center justify-content-between">
                                     <div class="text-end">
@@ -72,6 +76,8 @@
                         <div class="mt-2 px-0">
                             <button type="submit" class="main-btn w-100">Sign In</button>
                         </div>
+                        <p class="m-0 mt-2"><a href="{{ route('home') }}">Go To Site Tyer Zone</a></p>
+
                     </div>
                 </form>
             </div>

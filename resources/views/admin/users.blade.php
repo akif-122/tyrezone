@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -66,12 +67,12 @@
 
                             <tbody>
                                 @if (isset($users) && $users->isNotEmpty())
-                                <?php $id = 0; ?>
+                                
                                     @foreach ($users as $user)
-                                    @php $id++ @endphp
+                                    
 
                                         <tr>
-                                            <td>{{ $id }}</td>
+                                            <td>{{ $user->id }}</td>
                                             <td>{{ $user->f_name }} {{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->company_name }}</td>

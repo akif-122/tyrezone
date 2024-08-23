@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
+    <link rel="icon" href="{{ asset("speed.png") }}" />
 
     <!-- FONTAWESOME ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -61,13 +62,13 @@
                         </thead>
 
                         <tbody>
-                            <?php $id = 0 ?>
                             @forelse($products as $product)
-                            @php $id++ @endphp
                                 <tr>
-                                    <td>{{ $id }}</td>
+                                    <td>{{ $product->id }}</td>
                                     <td>{{ $product->name }}</td>
-                                    <td><img src="{{ $product->image }}" alt="{{ $product->name }}"></td>
+                                    <td>
+                                        <img src="{{ $product->image }}" alt="{{ $product->name }}">
+                                    </td>
                                     <td>{{ $product->manufacturer_name }}</td>
                                     <td>{{ $product->tyre_pattern }}</td>
                                     <td>{{ $product->fuel_efficiency }}</td>

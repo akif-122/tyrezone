@@ -11,7 +11,7 @@
         {{-- <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{$admin->name}}</a> --}}
         <ul class="dropdown-menu dropdown-menu-end">
             <a href="{{ route("adminProfile") }}" class="dropdown-item">Profile</a>
-            <a href="{{ url('logout') }}" class="dropdown-item">Logout</a>
+            <a href="{{ route('adminIndex') }}" class="dropdown-item">Logout</a>
         </ul>
     </div>
 

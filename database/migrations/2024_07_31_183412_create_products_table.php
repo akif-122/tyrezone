@@ -26,8 +26,10 @@ class CreateProductsTable extends Migration
             $table->string('season');
             $table->decimal('price', 8, 2); // Example: 9999.99
             $table->boolean('budget_tyres')->default(false);
+            $table->binary('image')->nullable(); // Use binary to store image data
             $table->timestamps();
         });
+
     }
 
     /**
