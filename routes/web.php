@@ -131,7 +131,8 @@ Route::post('/remove-from-cart', [ProductController::class, 'removeFromSideCart'
 
 
 
-
+Route::view("shop", "shop")->name("shop");
+Route::view("shop-detail", "shop-detail")->name("shop-detail");
 
 
 

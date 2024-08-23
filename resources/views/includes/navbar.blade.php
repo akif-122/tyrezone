@@ -143,6 +143,7 @@
                     </li>
 
                     <li><a href="{{route("gallery")}}" class="{{ Route::is("gallery") ? "active": "" }} ">Gallery</a></li>
+                    <li><a href="{{route("shop")}}" class="{{ Route::is("shop") ? "active": "" }} ">Shop</a></li>
                     
                     <li><a href="{{route("about")}}" class="{{ Route::is("about") ? "active": "" }} ">About</a></li>
                     <li><a href="{{route("contact")}}" class="{{ Route::is("contact") ? "active": "" }} ">Contact</a></li>
