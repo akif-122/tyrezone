@@ -2913,6 +2913,11 @@ HERO BANNER SECTION START
   REGISTRATION FORM START
 =======================================
 */
+.account-buttons{
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+}
 .registration {
   margin: 70px 0;
 }

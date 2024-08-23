@@ -12,9 +12,10 @@
 @if (Auth::check())
     <!-- Show this section only to logged-in users -->
     <section class="account-buttons">
-        <div class="container text-center">
-            <a href="{{ route('userDash') }}" class="btn btn-primary">Go to Your Account</a>
-            <a href="{{ route('logout') }}" class="btn btn-secondary" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign Out</a>
+        <div class="container text-center ">
+            <p>You are already loggedin! Go to your dashboard OR logout.  </p>
+            <a href="{{ route('userDash') }}" class="main-btn">Go to  Dashboard</a>
+            <a href="{{ route('logout') }}" class="btn btn-link text-decoration-none" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
             <form id="logout-form" action="{{ route('logout') }}" style="display: none;">
                 @csrf
             </form>
