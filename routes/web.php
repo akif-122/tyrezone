@@ -113,6 +113,7 @@ Route::view("/search", "search")->name("search");
 Route::view("/services", "services")->name("services");
 // Route::view("/tyre-pattern", [ManufacturerController::class,'tyre-pattern'])->name("tyre-pattern");
 Route::get("/index-pattern", [ManufacturerController::class, 'render_pattern'])->name("index-pattern");
+Route::get("/shop", [ManufacturerController::class, 'render_pattern'])->name("shop");
 Route::get("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
 Route::delete('/cart/remove/{id}', [ProductController::class, 'removeFromCart'])->name('cart.remove');
 // Route::post("MainCart/{id}", [ProductController::class, 'viewCart'])->name("MainCart");
