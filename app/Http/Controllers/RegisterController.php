@@ -15,7 +15,7 @@ class RegisterController extends Controller
     public function userDash()
     {
         // Check if the user is already authenticated
-        if (Auth::check()) {
+        if (Auth::check()){
             // If the user is logged in, retrieve their details
             $users = DB::table('users')->where('email', Auth::user()->email)->first();
             // Redirect to the user dashboard with the user data
@@ -81,11 +81,15 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
 
         // Attempt to authenticate the user
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)){
             if (Auth::check()) {
 
                 // If the user is logged in, retrieve their details
                 $users = DB::table('users')->where('email', Auth::user()->email)->first();
+                session([
+                    'id' => $users->id,
+                ]);
+
                 // Redirect to the user dashboard with the user data
                 return view('user_dashboard', ['users' => $users]);
             }

@@ -60,7 +60,7 @@ class AdminController extends Controller
             ]);
             // Redirect to the dashboard with a success message
             if (auth()->check())
-                return redirect()->route("adminDashboard");
+                return redirect()->route('adminDashboard');
             // return view('admin.dashboard',compact('manufacturers','pattern','product'));
             else
                 return redirect()->route("adminIndex");
@@ -82,7 +82,6 @@ class AdminController extends Controller
     }
     public function logout(Request $request)
     {
-        // ** Temprory for all type of users ** // 
         // Log out the user
         Auth::logout();
 
@@ -92,10 +91,11 @@ class AdminController extends Controller
         // Regenerate the session token to prevent session fixation attacks
         $request->session()->regenerateToken();
 
-        // Clear the cache and redirect
+        // Redirect and set cache control headers
         return redirect('/adminIndex')
-            ->with('success', 'Logged out successfully')
-            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
-            ->header('Pragma', 'no-cache');
+        ->with('success', 'Logged out successfully')
+        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        ->header('Pragma', 'no-cache');
     }
+
 }

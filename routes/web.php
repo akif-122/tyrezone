@@ -32,9 +32,7 @@ Route::get('/admin/dashboard', [DashboardController::class, 'dash'])->name('admi
 Route::get("admin/tyre-pattren", [ManufacturerController::class, "tyre_pattern"])->name("adminTyrepattren");
 // });
 
-Route::get('/change_password', function () {
-    return view('change_password');
-})->name("change-password");
+Route::get('/change_password', [UserController::class, 'changePassword'])->name("change-password");
 
 Route::get('/addByAdmin', [ProductController::class, 'addPage'])->name('addByAdmin');
 Route::get('/admin', function () {
@@ -71,7 +69,7 @@ Route::post('/add_pattern', [ManufacturerController::class, 'save_tyre_pattern']
 Route::delete('/delete_pattern', [ManufacturerController::class, 'delete_tyre_pattern'])->name('delete_tyre_pattern');
 Route::post('/dashboard', [AdminController::class, 'login'])->name('dashboard');
 // Route::get('/dashIndex', [AdminController::class, 'dashIndex'])->name('dashIndex');
-Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+Route::get('/logoutAdmin', [AdminController::class, 'logout'])->name('logoutAdmin');
 Route::get('/adminOrders', function () {
     return view('admin/orders');
 });
@@ -97,7 +95,7 @@ Route::post('/payment/process', [PaymentController::class, 'process'])->name('pa
 // PAGES VIEWS ROUTES
 Route::view("/", "index")->name("home");
 Route::view("/login", "login")->name("login");
-Route::view("/op", "register")->name("register");
+Route::view("/UserSignup", "register")->name("register");
 Route::view("/about", "about")->name("about");
 Route::view("/blog-detail", "blog-detail")->name("blog-detail");
 Route::view("/blogs", "blogs")->name("blogs");
@@ -124,6 +122,7 @@ Route::get('/fetch-cart', [ProductController::class, 'fetchCart'])->name('fetchC
 // Route to update cart (increase or decrease quantity)
 Route::post('/update-cart', [ProductController::class, 'updateSideCart'])->name('updateCart');
 Route::post('/fetch-user-data', [UserController::class, 'fetchUserData'])->name('fetch.user.data');
+Route::post('/checkoutValidate', [UserController::class, 'validateCredentials'])->name('checkoutValidate');
 
 
 // Route to remove an item from the cart

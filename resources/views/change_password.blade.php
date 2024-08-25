@@ -28,7 +28,7 @@
                     <section class="registration form-wrap  py-3 mt-0">
                         <div class="container px-0">
 
-                            <form action="php/change-password.html" method="POST">
+                            <form action="{{route('changePassword')}}" method="POST">
                                 <div class="col-lg-6 col-md-12   sign-up-wrap px-2 px-sm-3">
                                     <div class="row ">
 

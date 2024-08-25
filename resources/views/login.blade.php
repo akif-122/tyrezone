@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="mt-2 px-0">
-                        <button class="main-btn w-100" type="submit">Signin</button>
+                        <button class="main-btn w-100" type="submit">Sign in</button>
                     </div>
                     <p class="px-0 my-2">Don't have an account? <a href="{{ route('register') }}">Register</a></p>
                 </div>

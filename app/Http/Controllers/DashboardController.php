@@ -16,7 +16,7 @@ class DashboardController extends Controller
     }
     public function dash()
     {
-        if (auth()->user()) {
+        if (auth()->check()){
             $manufacturers = session('manufacturers');
             $pattern = session('pattern');
             $product = session('product');
