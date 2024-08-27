@@ -286,13 +286,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 mb-4">
-                                        <div class="form-group">
-                                            <label for="">Tyre Type:</label>
-                                            <input type="text" name="type" class="form-control"
-                                                placeholder="Tyre Type" value="Car" required>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="col-md-4 mb-4">
                                         <div class="form-group">
                                             <label for="">Speed</label>
@@ -320,6 +314,13 @@
                                                 <option value="Y">Y</option>
                                                 <option value="Z">Z</option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="">Tyre Type:</label>
+                                            <input type="text" name="type" class="form-control"
+                                                placeholder="Tyre Type" value="Car" required>
                                         </div>
                                     </div>
 
