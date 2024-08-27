@@ -39,33 +39,40 @@
         <section class="shop-detail">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 col-sm-6 mx-auto mb-5">
-                        <div class="product-view border">
-                            <div class="main-img d-flex border-bottom">
-                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}" width="100%"
+                    <div class="col-lg-5 col-12 mx-auto mb-5">
+                        <div class="product-view ">
+                            <div class="main-img d-flex ">
+                                <div class="p-img">
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}" width="100%"
                                     alt="">
-                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-2.webp') }}" width="100%"
+                                </div>
+
+                                <div class="p-img">
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-2.png') }}" width="100%"
                                     alt="">
-                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-3.webp') }}" width="100%"
+                                </div>
+                                <p class="p-img">
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-3.png') }}" width="100%"
                                     alt="">
+                                </p>
                             </div>
-                            <div class="img-filter d-flex align-items-center justify-content-between">
+                            <div class="img-filter d-flex align-items-center justify-content-around">
                                 <div class="filter active" data-filter="1">
-                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}" width="100px"
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}" width="100px"
                                         alt="">
                                 </div>
                                 <div class="filter" data-filter="2">
-                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-2.webp') }}" width="100px"
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-2.png') }}" width="100px"
                                         alt="">
                                 </div>
                                 <div class="filter" data-filter="3">
-                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-3.webp') }}" width="100px"
+                                    <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-3.png') }}" width="100px"
                                         alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-lg-7">
                         <div class="product-detail">
                             <h2>Bridgestone Alenza 001 215/60 R17</h2>
                             <p>The Bridgestone Alenza 001 215/60 R17 has been carefully engineered to meet the
@@ -74,14 +81,14 @@
                                 alike. The tyre offers superior performance with outstanding comfort and longevity... <a
                                     href="#description">More Detail</a> </p>
 
-                            <h5 class="price">Price : $300</h5>
+                            <h5 class="price">$ 300.00</h5>
 
-                            <div class="btns mb-4">
-                                <button class="main-btn">Add To Cart <i
-                                        class="ms-2 fa-solid fa-cart-arrow-down"></i></button>
+                            <div class="btns d-flex gap-3 my-4">
+                                <button class="main-btn rounded-0 py-2 btn-outline">Add To Cart </button>
+                                <button class="main-btn rounded-0 py-2">Buy Now </button>
                             </div>
 
-                            <div class="tyre-detail">
+                            <div class="tyre-detail pt-3">
                                 <h4>Alenza 215/60 R17 Specifications</h4>
                                 <div class="table-responsive">
                                     <table class="table table-striped border">
@@ -190,7 +197,7 @@
                                     <a href="{{ route("shop-detail") }}">
                                         <div class="product-card border">
                                             <div class="p-card-img">
-                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}"
+                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}"
                                                     alt="" width="100%">
                                             </div>
 
@@ -215,7 +222,7 @@
                                     <a href="{{ route("shop-detail") }}">
                                         <div class="product-card border">
                                             <div class="p-card-img">
-                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}"
+                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}"
                                                     alt="" width="100%">
                                             </div>
 
@@ -240,7 +247,7 @@
                                     <a href="{{ route("shop-detail") }}">
                                         <div class="product-card border">
                                             <div class="p-card-img">
-                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}"
+                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}"
                                                     alt="" width="100%">
                                             </div>
 
@@ -265,7 +272,7 @@
                                     <a href="{{ route("shop-detail") }}">
                                         <div class="product-card border">
                                             <div class="p-card-img">
-                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.webp') }}"
+                                                <img src="{{ asset('assets/imgs/shop/Bridgestone-Alenza-1.png') }}"
                                                     alt="" width="100%">
                                             </div>
 
@@ -299,7 +306,7 @@
 
         <script>
             let filters = document.querySelectorAll(".filter");
-            let filterImgs = document.querySelectorAll(".main-img img");
+            let filterImgs = document.querySelectorAll(".main-img .p-img");
 
             filters.forEach(fitler => {
                 fitler.addEventListener("click", function(e) {
