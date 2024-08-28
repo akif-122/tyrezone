@@ -25,6 +25,9 @@
                 <a class="{{ Route::is("adminTyrepattren") ? "active" : "" }}" href="{{route("adminTyrepattren")}}"><i class="fa-solid fa-sliders"></i> Tyre Patteren</a>
             </li>
             <li>
+                <a class="{{ Route::is("tyre-sizes") ? "active" : "" }}" href="{{route("adminTyrepattren")}}"><i class="fa-solid fa-sliders"></i> Tyre Sizes</a>
+            </li>
+            <li>
                 <a class="{{ Route::is("adminUsers") ? "active" : "" }}"  href="{{route("adminUsers")}}"><i class="fa-solid fa-users"></i> All users</a>
             </li>
             <li>

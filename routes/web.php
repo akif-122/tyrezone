@@ -93,7 +93,8 @@ Route::post('/payment/process', [PaymentController::class, 'process'])->name('pa
 
 
 // PAGES VIEWS ROUTES
-Route::view("/", "index")->name("home");
+Route::get("/", [UserController::class, 'main'])->name("home");
+Route::get('/filter-sizes', [UserController::class, 'filter'])->name('filter.sizes');
 Route::view("/login", "login")->name("login");
 Route::view("/UserSignup", "register")->name("register");
 Route::view("/about", "about")->name("about");
@@ -161,3 +162,11 @@ Route::prefix("admin")->group(function () {
     // Route::view("/products", "admin.products")->name("products");
     Route::view("/tyrePattern", "admin.tyre-Patteren")->name("tyrePattern");
 });
+
+
+
+// TYRE SIZES ROUTES
+
+Route::view("tyre-sizes", "admin.tyre-sizes")->name("tyre-sizes");
+Route::view("add-sizes", "admin.add-tyre-size")->name("add-tyre-size");
+Route::view("edit-size", "admin.edit-tyre-size")->name("edit-tyre-size");

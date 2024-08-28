@@ -5,11 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    public function filter(Request $request)
+    {
+        // Get the selected filter criteria
+        $width = $request->input('width');
+        $profile = $request->input('profile');
+        $rim_size = $request->input('rim_size');
+        $speed = $request->input('speed');
+
+        // Fetch all sizes to use in the form options
+        $data = DB::table('size')->get();
+
+        // Query the database based on the filters
+        $query = DB::table('size')
+        ->join('products', 'size.product_id', '=', 'products.id')
+        ->select('products.*')  // Select all columns from products table
+        ->distinct();
+
+        if ($width) {
+            $query->where('width', $width);
+        }
+        if ($profile) {
+            $query->where('profile', $profile);
+        }
+        if ($rim_size) {
+            $query->where('rim_size', $rim_size);
+        }
+        if ($speed) {
+            $query->where('speed', $speed);
+        }
+
+        $filteredSizes = $query->get();
+
+        // Return the view with the filtered data
+        return view('index', ['data' => $data, 'filteredSizes' => $filteredSizes]); // Replace 'your_view_name' with your actual view name
+    }
+    public function main(){
+        $data = DB::table('size')->get();
+        return view('index', compact('data'));
+    }
     public function fetchUserData(Request $request)
     {
         // Get the currently authenticated user

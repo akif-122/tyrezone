@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
             $table->string('f_name'); // User's first name
             $table->string('last_name'); // User's last name
             $table->string('email')->unique(); // User's email, must be unique
-            $table->integer('phone'); // User's phone number
+            // $table->integer('phone'); // User's phone number
             $table->string('address')->nullable(); // User's address, nullable
             $table->string('city')->nullable(); // User's city, nullable
             $table->string('country')->nullable(); // User's country, nullable

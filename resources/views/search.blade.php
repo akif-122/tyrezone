@@ -183,7 +183,6 @@
 
                 <!-- TYRES START-->
                 <section class="tyres">
-                    <h4 class="text-center mb-4">Budget Tyres</h4>
                     <!-- <div class="col-lg-3 col-md-4  col-sm-6 mb-3 mb-md-5 px-2"> -->
                     <div class="row">
                         <!-- CARD -->

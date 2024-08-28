@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Size;
 use App\Models\Product;
 use App\Models\Manufacturer;
 use App\Models\TyrePattern;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -16,43 +18,63 @@ class ProductController extends Controller
 
     public function add(Request $request)
     {
-        // Validate the request data
+        // Validate the incoming request
         $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Validate the image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'manu_name' => 'required|string|max:255',
             'pattern_type' => 'required|string|max:255',
             'fuel' => 'required|string|max:255',
             'wet_grip' => 'required|string|max:255',
             'road_noise' => 'required|string|max:255',
-            'size' => 'required|string|max:255',
+            'width' => 'required|numeric',
+            'profile' => 'required|numeric',
+            'rim' => 'required|string',
+            'speed' => 'required|string',
             'type' => 'required|string|max:255',
-            'season' => 'required|integer|between:0,2',
+            'season' => 'required|integer',
             'budget' => 'nullable|boolean',
-            'price' => 'required|numeric|min:0',
+            'price' => 'required|numeric',
         ]);
 
         // Handle file upload
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagePath = $image->store('images', 'public'); // Store file and get path
+            $imagePath = $request->file('image')->store('images', 'public');
         }
 
-        // Create and save the new product
-        Product::create([
-            'name' => $request->name,
-            'image' => $imagePath, // Store the file path
-            'manufacturer_name' => $request->manu_name,
-            'tyre_pattern' => $request->pattern_type,
-            'fuel_efficiency' => $request->fuel,
-            'wet_grip' => $request->wet_grip,
-            'road_noise' => $request->road_noise,
-            'size' => $request->size,
-            'tyre_type' => $request->type,
-            'season' => $request->season,
-            'budget_tyres' => $request->has('budget') ? true : false,
-            'price' => $request->price,
+        // Check for existing product to avoid duplication
+        $existingProduct = Product::where('name', $request->input('name'))
+            ->where('manufacturer_name', $request->input('manu_name'))
+            ->first();
+
+        if ($existingProduct) {
+            // If a product with the same name and manufacturer already exists
+            return redirect()->back()->with('error', 'Product with the same name and manufacturer already exists!');
+        }
+
+        // Create the product
+        $product = Product::create([
+            'name' => $request->input('name'),
+            'image' => $imagePath,
+            'manu_name' => $request->input('manu_name'),
+            'pattern_type' => $request->input('pattern_type'),
+            'fuel' => $request->input('fuel'),
+            'wet_grip' => $request->input('wet_grip'),
+            'road_noise' => $request->input('road_noise'),
+            'type' => $request->input('type'),
+            'season' => $request->input('season'),
+            'budget' => $request->input('budget') ? 1 : 0,
+            'price' => $request->input('price'),
+        ]);
+
+        // Create size entry
+        Size::create([
+            'product_id' => $product->id,
+            'width' => $request->input('width'),
+            'profile' => $request->input('profile'),
+            'rim' => $request->input('rim'),
+            'speed' => $request->input('speed'),
         ]);
 
         return redirect()->route('adminProducts');

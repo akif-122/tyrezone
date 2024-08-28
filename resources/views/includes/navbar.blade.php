@@ -91,7 +91,7 @@
                     <li><a href="{{route("home")}}" class="{{ Route::is("home") ? "active": "" }} ">Home</a></li>
 
                     <li class="dropdown mega-dropdown">
-                        <a href="#" class="{{ Route::is("manufacturer") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
+                        <a href="#" class="dropdown-toggle {{ Route::is("manufacturer") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
                             TYRE MANUFACTURERS</a>
 
                         <div class="dropdown-menu mega-dropdown-menu">
@@ -107,7 +107,7 @@
                     </li>
 
                     <li class="dropdown mega-dropdown">
-                        <a href="#" class="{{ Route::is("services") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
+                        <a href="#" class="dropdown-toggle {{ Route::is("services") ? "active": "" }} " data-bs-toggle="dropdown" class="dropdown-toggle">
                             Services</a>
 
                         <div class="dropdown-menu mega-dropdown-menu">
