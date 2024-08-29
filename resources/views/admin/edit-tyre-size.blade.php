@@ -45,7 +45,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="m-0">Edit Tyre Size</h5>
 
-                            <a class="main-btn sm" href="{{ route("tyre-sizes") }}">All Sizes</a>
+                            <a class="main-btn sm" href="{{ route("tyre-sizes")}}">All Sizes</a>
 
                         </div>
 
@@ -53,32 +53,32 @@
                         <p class="m-0  text-success"> </p>
 
                         <div class="form form-wrap sign-up-wrap ">
-                            <form action="" method="post">
+                            <form action="{{ route('size.update', $size->id) }}" method="POST">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Width:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Width">
+                                            <input type="text" name="width" value="{{$size->width}}" class="form-control" placeholder="Width">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Profile:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Profile">
+                                            <input type="text" name="profile" value="{{$size->profile}}" class="form-control" placeholder="Profile">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Rim Size:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Rim Size">
+                                            <input type="text" name="rim_size" value="{{$size->rim_size}}" class="form-control" placeholder="Rim Size">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="">Speed:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Speed">
+                                            <input type="text" name="speed" value="{{$size->speed}}" class="form-control" placeholder="Speed">
                                         </div>
                                     </div>
 

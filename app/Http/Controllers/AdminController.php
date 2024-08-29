@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use App\Models\Manufacturer;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\TyrePattern;
 use App\Models\users;
 use Illuminate\Console\View\Components\Alert;
@@ -43,6 +44,7 @@ class AdminController extends Controller
             // $last_name = $admin->last_name;
             request()->session()->regenerate();
             $manufacturers = Manufacturer::all() ?? collect();
+            $size = Size::all() ?? collect();
             $pattern = TyrePattern::all() ?? collect();
             $product = Product::all() ?? collect();
             $manufacturersCount = Manufacturer::count();
@@ -53,6 +55,7 @@ class AdminController extends Controller
                 'manufacturers' => $manufacturers,
                 'pattern' => $pattern,
                 'product' => $product,
+                'size' => $size,
                 'manufacturers_count' => $manufacturersCount,
                 'pattern_count' => $patternCount,
                 'product_count' => $productCount,

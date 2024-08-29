@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\TyreSizeController;
 use App\Http\Middleware;
 
 
@@ -163,10 +164,19 @@ Route::prefix("admin")->group(function () {
     Route::view("/tyrePattern", "admin.tyre-Patteren")->name("tyrePattern");
 });
 
-
+Route::post('/add-tyre-size', [TyreSizeController::class, 'saveSize'])->name('save-tyre-size');
 
 // TYRE SIZES ROUTES
 
-Route::view("tyre-sizes", "admin.tyre-sizes")->name("tyre-sizes");
+Route::get("tyre-sizes",[TyreSizeController::class,'showTyreSizes'])->name("tyre-sizes");
+// routes/web.php
+
+Route::delete('/TyreSize/{id}', [TyreSizeController::class, 'deleteSize'])->name('size.delete');
+
 Route::view("add-sizes", "admin.add-tyre-size")->name("add-tyre-size");
 Route::view("edit-size", "admin.edit-tyre-size")->name("edit-tyre-size");
+// Route to display the edit form
+Route::get('/tyre-sizes/{id}/edit', [TyreSizeController::class, 'edit'])->name('size.edit');
+
+// Route to handle the update request
+Route::post('/tyre-sizes/{id}', [TyreSizeController::class, 'update'])->name('size.update');

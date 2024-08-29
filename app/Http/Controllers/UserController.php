@@ -47,7 +47,7 @@ class UserController extends Controller
         return view('index', ['data' => $data, 'filteredSizes' => $filteredSizes]); // Replace 'your_view_name' with your actual view name
     }
     public function main(){
-        $data = DB::table('size')->get();
+        $data = DB::table('size')->whereNotNull('product_id')-> get();
         return view('index', compact('data'));
     }
     public function fetchUserData(Request $request)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Manufacturer;
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\TyrePattern;
 use Illuminate\Http\Request;
 
@@ -222,7 +223,8 @@ class ManufacturerController extends Controller
     {
         $manufacturer = Manufacturer::get();
         $pattern = TyrePattern::get();
-        return view('admin.add-product', compact('manufacturer'), compact('pattern'));
+        $size = Size::get()->whereNull('product_id');
+        return view('admin.add-product', compact('manufacturer','pattern','size'));
     }
     public function dynamic_manufactuer_option()
     {

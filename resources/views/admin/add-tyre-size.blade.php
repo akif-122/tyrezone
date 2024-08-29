@@ -40,62 +40,52 @@
 
                
                 <div class="content-area mt-5">
-                    <div class="col-md-6 mx-auto">
+    <div class="col-md-6 mx-auto">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="m-0">Add Tyre Size</h5>
+            <a class="main-btn sm" href="{{ route('tyre-sizes') }}">All Sizes</a>
+        </div>
 
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="m-0">Add Tyre Size</h5>
+        <p class="mb-0 mt-4 text-danger"></p>
+        <p class="m-0  text-success"></p>
 
-                            <a class="main-btn sm" href="{{ route("tyre-sizes") }}">All Sizes</a>
-
+        <div class="form form-wrap sign-up-wrap">
+            <form action="{{ route('save-tyre-size') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="width">Width:</label>
+                            <input type="text" name="width" class="form-control" placeholder="Width">
                         </div>
-
-                        <p class="mb-0 mt-4 text-danger"></p>
-                        <p class="m-0  text-success"> </p>
-
-                        <div class="form form-wrap sign-up-wrap ">
-                            <form action="" method="post">
-                                @csrf
-                                <div class="row">
-
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="">Width:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Width">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="">Profile:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Profile">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="">Rim Size:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Rim Size">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-group">
-                                            <label for="">Speed:</label>
-                                            <input type="text" name="name" class="form-control" placeholder="Speed">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-12 text-center">
-                                        <button class="main-btn sm">Add Size</button>
-                                    </div>
-
-                                </div>
-                            </form>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="profile">Profile:</label>
+                            <input type="text" name="profile" class="form-control" placeholder="Profile">
                         </div>
-
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="rim_size">Rim Size:</label>
+                            <input type="text" name="rim_size" class="form-control" placeholder="Rim Size">
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="speed">Speed:</label>
+                            <input type="text" name="speed" class="form-control" placeholder="Speed">
+                        </div>
                     </div>
 
-
-
+                    <div class="col-12 text-center">
+                        <button class="main-btn sm">Add Size</button>
+                    </div>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 

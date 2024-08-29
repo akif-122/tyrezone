@@ -72,23 +72,33 @@
                             </thead>
 
                             <tbody>
+                                @foreach ($allSizes as $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>76</td>
-                                    <td>34</td>
-                                    <td>343</td>
-                                    <td>H</td>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->width}}</td>
+                                    <td>{{$item->profile}}</td>
+                                    <td>{{$item->rim_size}}</td>
+                                    <td>{{$item->speed}}</td>
+                                    
 
 
                                     <td>
-                                        <a href="{{ route("edit-tyre-size") }}" class="btn btn-sm btn-info"><i
-                                                class="fa-solid fa-pen"></i></a>
+                                        <a href="{{ route('size.edit', $item->id) }}" class="btn btn-sm btn-info">
+        <i class="fa-solid fa-pen"></i>
+    </a>
 
-                                        <a href="php/delete-patteren.html?id=8" class="btn btn-sm btn-danger"><i
-                                                class="fa-solid fa-trash-can"></i></a>
+                                        <form action="{{ route('size.delete', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this size?');" style="display: inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-danger">
+        <i class="fa-solid fa-trash-can"></i>
+    </button>
+</form>
+
 
                                     </td>
                                 </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

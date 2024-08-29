@@ -57,12 +57,12 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => $request->input('name'),
             'image' => $imagePath,
-            'manu_name' => $request->input('manu_name'),
-            'pattern_type' => $request->input('pattern_type'),
-            'fuel' => $request->input('fuel'),
+            'manufacturer_name' => $request->input('manu_name'),
+            'tyre_pattern' => $request->input('pattern_type'),
+            'fuel_efficiency' => $request->input('fuel'),
             'wet_grip' => $request->input('wet_grip'),
             'road_noise' => $request->input('road_noise'),
-            'type' => $request->input('type'),
+            'tyre_type' => $request->input('type'),
             'season' => $request->input('season'),
             'budget' => $request->input('budget') ? 1 : 0,
             'price' => $request->input('price'),
@@ -73,7 +73,7 @@ class ProductController extends Controller
             'product_id' => $product->id,
             'width' => $request->input('width'),
             'profile' => $request->input('profile'),
-            'rim' => $request->input('rim'),
+            'rim_size' => $request->input('rim'),
             'speed' => $request->input('speed'),
         ]);
 
@@ -87,8 +87,9 @@ class ProductController extends Controller
         if(auth()->user()){
         $product = Product::findOrFail($id);
         $manufacturer = Manufacturer::get();
+        $size = Size::get();
         $pattern = TyrePattern::get();
-        return view('admin.edit-product', compact('product', 'manufacturer', 'pattern'));
+        return view('admin.edit-product', compact('product', 'manufacturer', 'pattern','size'));
     } else {
             return redirect()->route('adminIndex');
         }
