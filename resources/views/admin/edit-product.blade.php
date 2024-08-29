@@ -117,8 +117,56 @@
 
                                     <div class="col-md-4 mb-4">
                                         <div class="form-group">
-                                            <label for="size">Size:</label>
-                                            <input type="text" name="size" value="{{ $product->size }}" class="form-control" placeholder="Size">
+                                            <label for="">Width</label>
+                                            <select name="width" class="form-select" required="">
+                                                <option value="" selected="" style="display:none">
+                                                    Select</option>
+                                                    {{-- @foreach ($size as $item)
+                                                        <option value="{{$item->width}}">{{$item->width}}</option>        
+                                                    @endforeach --}}
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="">Profile</label>
+                                            <select name="profile" class="form-select" required="">
+                                                <option value="" selected="" style="display:none">
+                                                    Select</option>
+                                                {{-- @foreach ($size as $item)
+                                                        <option value="{{$item->profile}}">{{$item->profile}}</option>        
+                                                    @endforeach --}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="">Rim Size</label>
+                                            <select name="rim" class="form-select" required="">
+                                                <option value="" selected="" style="display:none">
+                                                    Select</option>
+                                                {{-- @foreach ($size as $item)
+                                                        <option value="{{$item->rim_size}}">{{$item->rim_size}}</option>        
+                                                    @endforeach --}}
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                  
+                                    <div class="col-md-4 mb-4">
+                                        <div class="form-group">
+                                            <label for="">Speed</label>
+                                            <select name="speed" class="form-select">
+                                                <option value="" selected="" style="display:none">
+                                                    Select</option>
+                                                {{-- @foreach ($size as $item)
+                                                        <option value="{{$item->speed}}">{{$item->speed}}</option>        
+                                                    @endforeach --}}
+                                                
+                                                
+                                            </select>
                                         </div>
                                     </div>
 
